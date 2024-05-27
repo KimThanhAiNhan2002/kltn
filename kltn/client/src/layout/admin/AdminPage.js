@@ -131,10 +131,7 @@ const AdminPage = () => {
                 </li>
                 <li className="mm-active">
                   <button onClick={() => setCurrentView('list')} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-speedometer" viewBox="0 0 16 16">
-                      <path d="M8 2a.5.5 0 0 1 .5.5V4a.5.5 0 0 1-1 0V2.5A.5.5 0 0 1 8 2M3.732 3.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 8a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.389.389 0 0 0-.527-.02L7.547 7.31A.91.91 0 1 0 8.85 8.569l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
-                      <path fillRule="evenodd" d="M6.664 15.889A8 8 0 1 1 9.336.11a8 8 0 0 1-2.672 15.78zm-4.665-4.283A11.945 11.945 0 0 1 8 10c2.186 0 4.236.585 6.001 1.606a7 7 0 1 0-12.002 0z"/>
-                    </svg>
+                  <i class="fa-solid fa-map-location-dot"></i>
                     <span className="ms-2">Địa Điểm Du Lịch</span>
                   </button>
                 </li>
@@ -143,10 +140,7 @@ const AdminPage = () => {
                     setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
                     setCurrentView('list-accommodation');
                   }} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">
-                      <path d="M8 4a.5.5 0 0 1 .5.5V7h2.5a.5.5 0 0 1 0 1H8.5v2.5a.5.5 0 0 1-1 0V8H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z"/>
-                      <path fillRule="evenodd" d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0 1a6 6 0 1 0 0 12A6 6 0 0 0 8 2z"/>
-                    </svg>
+                    <i class="fa-solid fa-bed"></i>
                     <span className="ms-2">Nơi Lưu Trú</span>
                   </button>
                 </li>
@@ -155,9 +149,7 @@ const AdminPage = () => {
                     setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
                     setCurrentView('list-restaurant');
                   }} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-table" viewBox="0 0 16 16">
-                      <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm4 1v3h3V4H4zm4 0v3h4V4H8zm-4 4v3h3V8H4zm4 0v3h4V8H8z"/>
-                    </svg>
+                    <i class="fa-solid fa-utensils"></i>
                     <span className="ms-2">Nhà Hàng</span>
                   </button>
                 </li>
@@ -177,10 +169,7 @@ const AdminPage = () => {
                     setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
                     setCurrentView('list-service');
                   }} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-briefcase" viewBox="0 0 16 16">
-                      <path d="M6.5 0a.5.5 0 0 0-.5.5V1H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-4V.5a.5.5 0 0 0-.5-.5h-3zm1 .5h1V1h-1V.5zM1 4v-.5A1.5 1.5 0 0 1 2.5 2h11A1.5 1.5 0 0 1 15 3.5V4H1z"/>
-                      <path d="M0 6h16v5.5A1.5 1.5 0 0 1 14.5 13h-13A1.5 1.5 0 0 1 0 11.5V6zm3 7h10v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/>
-                    </svg>
+                    <i class="fa-solid fa-headset"></i>
                     <span className="ms-2">Dịch Vụ</span>
                   </button>
                 </li>
@@ -189,9 +178,7 @@ const AdminPage = () => {
                     setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
                     setCurrentView('list-souvenir');
                   }} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gift" viewBox="0 0 16 16">
-                      <path d="M8 0a2 2 0 0 0-1.995 1.85L6 2H4a2 2 0 0 0-1.995 1.85L2 4v2h12V4a2 2 0 0 0-1.85-1.995L12 2h-2a2 2 0 0 0-1.85-1.995L8 0zm0 1a1 1 0 0 1 .993.883L9 2h2a1 1 0 0 1 .117 1.993L11 4H9a1 1 0 0 1-.993-.883L8 3a1 1 0 0 1-1.993-.117L6 2h2a1 1 0 0 1 .993-.883L8 1zm-2.165 5H14v8a2 2 0 0 1-1.85 1.995L12 16H4a2 2 0 0 1-1.995-1.85L2 14V6h2.165zM8 5a3 3 0 0 0-2.995 2.824L5 8v2H2V4a1 1 0 0 1 1-1h2.78A3.001 3.001 0 0 0 8 5zM4 9v5a1 1 0 0 0 .883.993L5 15h6a1 1 0 0 0 .993-.883L12 14V9H4z"/>
-                    </svg>
+                    <i class="fa-solid fa-gift"></i>
                     <span className="ms-2">Quà Lưu Niệm</span>
                   </button>
                 </li>

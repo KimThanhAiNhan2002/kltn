@@ -120,7 +120,7 @@ const AddService = ({ setCurrentView, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm Dịch Vụ</button>
                 </div>
               </div>
             </div>

@@ -76,7 +76,7 @@ const AddRestaurant = ({ setCurrentView, touristSpotId }) => {
         <div className="container-xxl">
           <div className="card mb-4">
             <div className="card-header position-relative">
-              <h6 className="fs-17 fw-semi-bold mb-0">Add Restaurant</h6>
+              <h6 className="fs-17 fw-semi-bold mb-0">Thêm Nhà Hàng</h6>
             </div>
             <div className="card-body">
               <div className="row g-4">
@@ -141,7 +141,7 @@ const AddRestaurant = ({ setCurrentView, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm Nhà Hàng</button>
                 </div>
               </div>
             </div>

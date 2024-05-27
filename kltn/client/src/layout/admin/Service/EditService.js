@@ -7,7 +7,7 @@ const EditService = ({ setCurrentView, editId, touristSpotId }) => {
     name: '',
     price: '',
     description: '',
-    image: ''
+    image: '',
   });
   const [imagePreview, setImagePreview] = useState(null);
 

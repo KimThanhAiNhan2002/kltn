@@ -76,7 +76,7 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
         <div className="container-xxl">
           <div className="card mb-4">
             <div className="card-header position-relative">
-              <h6 className="fs-17 fw-semi-bold mb-0">Basic Informations</h6>
+              <h6 className="fs-17 fw-semi-bold mb-0">Thêm Nơi Lưu Trú</h6>
             </div>
             <div className="card-body">
               <div className="row g-4">
@@ -142,7 +142,7 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
                 </div>
                 
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm Nơi Lưu Trú</button>
                 </div>
               </div>
             </div>

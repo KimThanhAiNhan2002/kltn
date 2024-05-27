@@ -96,7 +96,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
               <div class="col-sm-12">
 
                 <div class="">
-                  <label class="required fw-medium mb-2">Description</label>
+                  <label class="required fw-medium mb-2">Mô tả</label>
                   <textarea class="form-control"  name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
                 </div>
 
@@ -127,7 +127,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
 
               </div>
               <div class="text-center">
-                <button  type="submit" class="btn btn-primary-soft"><i class="fa fa-plus me-2"></i>Add New</button>
+                <button  type="submit" class="btn btn-primary-soft"><i class="fa fa-plus me-2"></i>Thêm Địa Điểm Du Lịch</button>
               </div>
 
             </div>

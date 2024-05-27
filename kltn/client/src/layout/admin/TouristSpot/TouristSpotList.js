@@ -130,11 +130,11 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
                     <div className="d-flex flex-column gap-3 gap-lg-2 gap-xl-3 mt-auto z-1">
                       <a href={`tel:${spot.phone_number}`} className="d-flex gap-2 align-items-center fs-13 fw-semibold">
                         <i class="fa-solid fa-location-dot"></i>
-                        <span>{spot.address}</span>
+                        <span>Địa chỉ: {spot.address}</span>
                       </a>
                       <a className="d-flex gap-2 align-items-center fs-13 fw-semibold">
                       <i class="fa-solid fa-list"></i>                        
-                      <span>{spot.category}</span>
+                      <span>Danh mục: {spot.category}</span>
                       </a>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
                 d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
               />
             </svg>
-            previous
+            trước
           </a>
           {Array.from({ length: totalPages }, (_, index) => (
             <a
@@ -177,7 +177,7 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
             className={`next page-numbers ${currentPage === totalPages ? 'disabled' : ''}`}
             onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
           >
-            next
+            sau
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"

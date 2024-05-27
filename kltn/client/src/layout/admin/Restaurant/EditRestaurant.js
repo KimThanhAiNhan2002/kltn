@@ -76,7 +76,7 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
         <div className="container-xxl">
           <div className="card mb-4">
             <div className="card-header position-relative">
-              <h6 className="fs-17 fw-semi-bold mb-0">Edit Restaurant</h6>
+              <h6 className="fs-17 fw-semi-bold mb-0">Chỉnh Sửa Nhà Hàng</h6>
             </div>
             <div className="card-body">
               <div className="row g-4">

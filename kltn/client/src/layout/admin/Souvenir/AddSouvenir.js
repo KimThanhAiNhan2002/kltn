@@ -120,7 +120,7 @@ const AddSouvenir = ({ setCurrentView, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm Quà Lưu Niệm</button>
                 </div>
               </div>
             </div>

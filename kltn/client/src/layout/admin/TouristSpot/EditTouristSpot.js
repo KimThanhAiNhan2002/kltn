@@ -125,7 +125,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
         <div className="container-xxl">
           <div className="card mb-4">
             <div className="card-header position-relative">
-              <h6 className="fs-17 fw-semi-bold mb-0">Edit Tourist Spot</h6>
+              <h6 className="fs-17 fw-semi-bold mb-0">Chỉnh Sửa Địa Điểm Du Lịch</h6>
             </div>
             <div className="card-body">
               <div className="row g-4">
@@ -149,7 +149,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                 <div class="col-sm-12">
 
                 <div class="">
-                  <label class="required fw-medium mb-2">Description</label>
+                  <label class="required fw-medium mb-2">Mô tả</label>
                   <textarea class="form-control"  name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
                 </div>
 
@@ -174,7 +174,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-save me-2"></i>Cập Nhật</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-save me-2"></i>Lưu Thay Đổi</button>
                 </div>
               </div>
             </div>

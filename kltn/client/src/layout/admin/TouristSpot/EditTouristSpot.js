@@ -146,14 +146,23 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                     </select>
                   </div>
                 </div>
-                <div class="col-sm-12">
-
-                <div class="">
-                  <label class="required fw-medium mb-2">Mô tả</label>
-                  <textarea class="form-control"  name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Description</label>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={formData.description}
+                      onChange={handleDescriptionChange}
+                      config={{
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        simpleUpload: {
+                          uploadUrl: 'http://localhost:5000/api/image/upload',
+                          headers: { }
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
-
-              </div>
                 <div className="col-sm-12">
                   <div className="">
                     <label className="required fw-medium mb-2">Hình Ảnh</label>

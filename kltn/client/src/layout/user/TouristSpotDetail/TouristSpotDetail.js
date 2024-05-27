@@ -46,10 +46,12 @@ const TouristSpotDetail = () => {
     }, [contentRef]);
 
     return (
-      <p className={styles.description}>
-        Mô tả: <span className={styles.ellipsis} ref={contentRef}>{content}</span>
+      <div>
+        <p className={styles.description}>
+          Mô tả: <span className={styles.ellipsis} ref={contentRef} dangerouslySetInnerHTML={{ __html: content }}></span>
+        </p>
         {showMore && <button className={styles.moreBtn} onClick={() => openModal(content)}>Xem thêm</button>}
-      </p>
+      </div>
     );
   };
 
@@ -61,7 +63,7 @@ const TouristSpotDetail = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>{spot.name}</h1>
       <img src={spot.image} alt={spot.name} className={styles.resultImage} />
-      <p className={styles.description}>Mô tả: {spot.description}</p>
+      <p className={styles.description}>Mô tả: <div dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div></p>
       <p className={styles.address}>Địa chỉ: {spot.address}</p>
       <p className={styles.category}>Loại hình: {spot.category}</p>
       <a href={spot.google_map} target="_blank" rel="noopener noreferrer" className={styles.mapLink}>Xem trên Google Maps</a>

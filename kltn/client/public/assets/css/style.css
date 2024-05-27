@@ -3831,8 +3831,8 @@ hr {
 
 .profile-card .profile-card_bg--img:before,
 .profile-card .profile-card_bg--img:after {
-    left: -25%;
-    bottom: -63%;
+    /* left: -25%;
+    bottom: -63%; */
     width: 100%;
     height: 70%;
 }

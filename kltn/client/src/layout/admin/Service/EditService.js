@@ -66,40 +66,49 @@ const EditService = ({ setCurrentView, editId, touristSpotId }) => {
   };
 
   return (
-    <div className="service-form">
-      <h2>Chỉnh sửa Dịch Vụ</h2>
+    <div className="body-content">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={service.name}
-          onChange={handleChange}
-          placeholder="Tên"
-          required
-        />
-        <input
-          type="text"
-          name="price"
-          value={service.price}
-          onChange={handleChange}
-          placeholder="Giá"
-          required
-        />
-        <textarea
-          name="description"
-          value={service.description}
-          onChange={handleChange}
-          placeholder="Mô tả"
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-        {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
-        <button type="submit">Lưu Thay Đổi</button>
+        <div className="decoration blur-2"></div>
+        <div className="decoration blur-3"></div>
+        <div className="container-xxl">
+          <div className="card mb-4">
+            <div className="card-header position-relative">
+              <h6 className="fs-17 fw-semi-bold mb-0">Chỉnh sửa Dịch Vụ</h6>
+            </div>
+            <div className="card-body">
+              <div className="row g-4">
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Tên Dịch Vụ</label>
+                    <input type="text" className="form-control" name="name" value={service.name} placeholder="Tên" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Giá</label>
+                    <input type="text" className="form-control" name="price" value={service.price} placeholder="Giá" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Mô Tả</label>
+                    <textarea className="form-control" name="description" rows="7" value={service.description} onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Hình Ảnh</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                    {imagePreview && <img src={imagePreview} alt="Preview" />}
+                  </div>
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-save me-2"></i>Lưu Thay Đổi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

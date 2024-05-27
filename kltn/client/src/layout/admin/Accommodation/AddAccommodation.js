@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { addAccommodation } from '../../../api/accommodationsApi';
 import { getTouristSpots } from '../../../api/touristSpotsApi';
-import "./Accommdation.css";
+import "./Accommodation.css";
 
 const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
   const [accommodation, setAccommodation] = useState({
@@ -11,7 +11,7 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
     phone_number: '',
     description: '',
     image: '',
-    google_map: '', // Add google_map here
+    google_map: '',
     touristSpotId: touristSpotId || ''
   });
   const [touristSpots, setTouristSpots] = useState([]);
@@ -69,75 +69,85 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
   };
 
   return (
-    <div className="accommodation-form">
-      <h2>Thêm Nơi Lưu Trú</h2>
+    <div className="body-content">
       <form onSubmit={handleSubmit}>
-        <select
-          name="touristSpotId"
-          value={accommodation.touristSpotId}
-          onChange={handleChange}
-          required
-        >
-          <option value="" disabled>Chọn Địa Điểm Du Lịch</option>
-          {touristSpots.map((spot) => (
-            <option key={spot._id} value={spot._id}>{spot.name}</option>
-          ))}
-        </select>
-        <input
-          type="text"
-          name="name"
-          value={accommodation.name}
-          onChange={handleChange}
-          placeholder="Tên"
-          required
-        />
-        <input
-          type="text"
-          name="price"
-          value={accommodation.price}
-          onChange={handleChange}
-          placeholder="Giá"
-          required
-        />
-        <input
-          type="text"
-          name="address"
-          value={accommodation.address}
-          onChange={handleChange}
-          placeholder="Địa chỉ"
-          required
-        />
-        <input
-          type="text"
-          name="phone_number"
-          value={accommodation.phone_number}
-          onChange={handleChange}
-          placeholder="Số điện thoại"
-          required
-        />
-        <textarea
-          name="description"
-          value={accommodation.description}
-          onChange={handleChange}
-          placeholder="Mô tả"
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-        {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
-        <input
-          type="text"
-          name="google_map"
-          value={accommodation.google_map}
-          onChange={handleChange}
-          placeholder="Google Map"
-          required
-        />
-        <button type="submit">Thêm</button>
+        <div className="decoration blur-2"></div>
+        <div className="decoration blur-3"></div>
+        <div className="container-xxl">
+          <div className="card mb-4">
+            <div className="card-header position-relative">
+              <h6 className="fs-17 fw-semi-bold mb-0">Basic Informations</h6>
+            </div>
+            <div className="card-body">
+              <div className="row g-4">
+              <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Chọn Địa Điểm Du Lịch</label>
+                    <select
+                      className="form-select"
+                      name="touristSpotId"
+                      value={accommodation.touristSpotId}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="" disabled>Chọn Địa Điểm Du Lịch</option>
+                      {touristSpots.map((spot) => (
+                        <option key={spot._id} value={spot._id}>{spot.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Tên Nơi Lưu Trú</label>
+                    <input type="text" className="form-control" name="name" placeholder="Tên" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Giá</label>
+                    <input type="text" className="form-control" name="price" placeholder="Giá" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Mô Tả</label>
+                    <textarea className="form-control" name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Hình Ảnh</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} required />
+                    {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Địa Chỉ</label>
+                    <input type="text" className="form-control" name="address" placeholder="Địa chỉ" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Số Điện Thoại</label>
+                    <input type="text" className="form-control" name="phone_number" placeholder="Số điện thoại" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Google Map</label>
+                    <input type="text" className="form-control" name="google_map" placeholder="Google Map" onChange={handleChange} required />
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

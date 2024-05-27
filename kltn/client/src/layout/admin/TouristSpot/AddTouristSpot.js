@@ -68,7 +68,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
       <div class="container-xxl">
         <div class="card mb-4">
           <div class="card-header position-relative">
-            <h6 class="fs-17 fw-semi-bold mb-0">Basic Informations</h6>
+            <h6 class="fs-17 fw-semi-bold mb-0">Thêm Địa Điểm Du Lịch</h6>
           </div>
           <div class="card-body">
             <div class="row g-4">
@@ -97,7 +97,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
 
                 <div class="">
                   <label class="required fw-medium mb-2">Description</label>
-                  <textarea class="form-control" name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                  <textarea class="form-control"  name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
                 </div>
 
               </div>

@@ -1,9 +1,11 @@
-.restaurant-list {
+/* Shared Styles */
+.list {
     list-style-type: none;
     padding: 0;
-}
-
-.restaurant-list li {
+    margin: 0;
+  }
+  
+  .list li {
     background: #f9f9f9;
     margin: 10px 0;
     padding: 20px;
@@ -12,25 +14,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.restaurant-content {
+  }
+  
+  .content {
     display: flex;
     align-items: center;
     flex: 1;
     margin-right: 20px;
-}
-
-.restaurant-content img {
+  }
+  
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
     margin-right: 20px;
-}
-
-.restaurant-content div {
+  }
+  
+  .content div {
     display: flex;
     flex-direction: column;
-}
-
-.restaurant-content p {
+  }
+  
+  .content p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3; /* Số dòng tối đa */
@@ -38,25 +44,26 @@
     text-overflow: ellipsis;
     max-height: 4.5em; /* Giới hạn chiều cao tối đa */
     line-height: 1.5em; /* Chiều cao dòng */
-}
-
-.restaurant-list h3 {
+  }
+  
+  .list h3 {
     margin: 0;
     font-size: 1.5em;
     color: #333;
-}
-
-.restaurant-list p {
-    margin: 10px 0;
+  }
+  
+  .list p {
+    margin: 5px 0;
     color: #666;
-}
-
-.button-container {
+  }
+  
+  .button-container {
     display: flex;
+    flex-direction: column;
     gap: 10px; /* Khoảng cách giữa các nút */
-}
-
-.restaurant-list button {
+  }
+  
+  .list button {
     background-color: #007bff;
     border: none;
     color: white;
@@ -69,47 +76,47 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     min-width: 100px; /* Đảm bảo nút có kích thước tối thiểu */
-}
-
-.restaurant-list button:hover {
+  }
+  
+  .list button:hover {
     background-color: #0056b3;
-}
-
-.restaurant-list .delete-button {
+  }
+  
+  .list .delete-button {
     background-color: #dc3545;
-}
-
-.restaurant-list .delete-button:hover {
+  }
+  
+  .list .delete-button:hover {
     background-color: #c82333;
-}
-
-/* Form styling */
-.restaurant-form {
+  }
+  
+  /* Form styling */
+  .form {
     background: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
-}
-
-.restaurant-form h2 {
+  }
+  
+  .form h2 {
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
-}
-
-.restaurant-form input,
-.restaurant-form textarea,
-.restaurant-form select {
+  }
+  
+  .form input,
+  .form textarea,
+  .form select {
     width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-.restaurant-form button {
+  }
+  
+  .form button {
     background-color: #007bff;
     border: none;
     color: white;
@@ -118,17 +125,83 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.restaurant-form button:hover {
+  }
+  
+  .form button:hover {
     background-color: #0056b3;
-}
-
-.restaurant-form img {
+  }
+  
+  .form img {
     display: block;
     margin-top: 10px;
     max-width: 100%;
     height: auto;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .page-numbers {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .page-numbers a,
+  .page-numbers span {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--bs-primary);
+    background: #f0f0f0;
+  }
+  
+  .page-numbers a:hover,
+  .page-numbers a.current {
+    background: var(--bs-primary);
+    color: #ffffff;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body .description {
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card-image-hover img.image-tour {
+    width: 100%;
+    height: 200px; /* Chiều cao mong muốn của ảnh */
+  }
+  
+  .pagination a,
+  .pagination span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--bs-primary);
+    background: #f0f0f0;
+  }
+  
+  .pagination a.current,
+  .pagination a:hover {
+    background: var(--bs-primary);
+    color: #ffffff;
+  }
+  
+  

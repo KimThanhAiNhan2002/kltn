@@ -6,6 +6,7 @@ import restaurantRouter from './restaurantRouter.js';
 import specialtyRouter from './specialtyRouter.js';
 import serviceRouter from './serviceRouter.js';
 import souvenirRouter from './souvenirRouter.js';
+import imageUploadRouter from './imageUpload.js'; // Import router cho việc tải lên hình ảnh
 
 const initRouter = (app) => {
     // Router cho phần xác thực
@@ -18,6 +19,9 @@ const initRouter = (app) => {
     app.use('/api/touristSpots', specialtyRouter);
     app.use('/api/touristSpots', serviceRouter);
     app.use('/api/touristSpots', souvenirRouter);
+
+    // Router cho việc tải lên hình ảnh
+    app.use('/api/image', imageUploadRouter);
 
     // Route mặc định khi không khớp với bất kỳ router nào khác
     app.use('*', (req, res) => {

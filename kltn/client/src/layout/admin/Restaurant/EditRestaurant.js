@@ -10,7 +10,7 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
     phone_number: '',
     description: '',
     image: '',
-    google_map: '' // Add google_map here
+    google_map: ''
   });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -69,64 +69,67 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
   };
 
   return (
-    <div className="restaurant-form">
-      <h2>Chỉnh sửa Nhà Hàng</h2>
+    <div className="body-content">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={restaurant.name}
-          onChange={handleChange}
-          placeholder="Tên"
-          required
-        />
-        <input
-          type="text"
-          name="price"
-          value={restaurant.price}
-          onChange={handleChange}
-          placeholder="Giá"
-          required
-        />
-        <input
-          type="text"
-          name="address"
-          value={restaurant.address}
-          onChange={handleChange}
-          placeholder="Địa chỉ"
-          required
-        />
-        <input
-          type="text"
-          name="phone_number"
-          value={restaurant.phone_number}
-          onChange={handleChange}
-          placeholder="Số điện thoại"
-          required
-        />
-        <textarea
-          name="description"
-          value={restaurant.description}
-          onChange={handleChange}
-          placeholder="Mô tả"
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-        {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
-        <input
-          type="text"
-          name="google_map"
-          value={restaurant.google_map}
-          onChange={handleChange}
-          placeholder="Google Map"
-          required
-        />
-        <button type="submit">Lưu Thay Đổi</button>
+        <div className="decoration blur-2"></div>
+        <div className="decoration blur-3"></div>
+        <div className="container-xxl">
+          <div className="card mb-4">
+            <div className="card-header position-relative">
+              <h6 className="fs-17 fw-semi-bold mb-0">Edit Restaurant</h6>
+            </div>
+            <div className="card-body">
+              <div className="row g-4">
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Tên Nhà Hàng</label>
+                    <input type="text" className="form-control" name="name" value={restaurant.name} placeholder="Tên" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Giá</label>
+                    <input type="text" className="form-control" name="price" value={restaurant.price} placeholder="Giá" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Mô Tả</label>
+                    <textarea className="form-control" name="description" rows="7" value={restaurant.description} onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Hình Ảnh</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                    {imagePreview && <img src={imagePreview} alt="Preview" />}
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Địa Chỉ</label>
+                    <input type="text" className="form-control" name="address" value={restaurant.address} placeholder="Địa chỉ" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Số Điện Thoại</label>
+                    <input type="text" className="form-control" name="phone_number" value={restaurant.phone_number} placeholder="Số điện thoại" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="col-sm-12">
+                  <div className="">
+                    <label className="required fw-medium mb-2">Google Map</label>
+                    <input type="text" className="form-control" name="google_map" value={restaurant.google_map} placeholder="Google Map" onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-save me-2"></i>Lưu Thay Đổi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

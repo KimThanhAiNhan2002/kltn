@@ -5047,3 +5047,6 @@ hr {
 .activity-feed .feed-item .title {
     top: -7px;
 }
+.News__Detail__Content .image img{
+    width: 100%;
+}

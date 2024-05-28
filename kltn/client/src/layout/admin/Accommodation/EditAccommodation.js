@@ -99,10 +99,11 @@ const EditAccommodation = ({ setCurrentView, editId, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="col-sm-12">
-                  <div className="">
-                    <label className="required fw-medium mb-2">Hình Ảnh</label>
-                    <input type="file" accept="image/*" onChange={handleImageChange} />
-                    {imagePreview && <img src={imagePreview} alt="Preview" />}
+                  <label className="required fw-medium mb-2">Hình Ảnh</label>
+                  <div className="d-flex justify-content-between alight-item-center">
+                    
+                    <input  type="file" accept="image/*" onChange={handleImageChange} />
+                    {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
                 </div>
                 <div className="col-sm-12">

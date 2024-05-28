@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import TouristSpotList from '../admin/TouristSpot/TouristSpotList';
-import AddTouristSpot from '../admin/TouristSpot/AddTouristSpot';
-import EditTouristSpot from '../admin/TouristSpot/EditTouristSpot';
-import AccommodationList from '../admin/Accommodation/AccommodationList';
-import AddAccommodation from '../admin/Accommodation/AddAccommodation';
-import EditAccommodation from '../admin/Accommodation/EditAccommodation';
-import RestaurantList from '../admin/Restaurant/RestaurantList';
-import AddRestaurant from '../admin/Restaurant/AddRestaurant';
-import EditRestaurant from '../admin/Restaurant/EditRestaurant';
-import SpecialtyList from '../admin/Specialty/SpecialtyList';
-import AddSpecialty from '../admin/Specialty/AddSpecialty';
-import EditSpecialty from '../admin/Specialty/EditSpecialty';
-import ServiceList from '../admin/Service/ServiceList';
-import AddService from '../admin/Service/AddService';
-import EditService from '../admin/Service/EditService';
-import SouvenirList from '../admin/Souvenir/SouvenirList';
-import AddSouvenir from '../admin/Souvenir/AddSouvenir';
-import EditSouvenir from '../admin/Souvenir/EditSouvenir';
+import React, { useState, useEffect, useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import TouristSpotList from './TouristSpot/TouristSpotList';
+import AddTouristSpot from './TouristSpot/AddTouristSpot';
+import EditTouristSpot from './TouristSpot/EditTouristSpot';
+import AccommodationList from './Accommodation/AccommodationList';
+import AddAccommodation from './Accommodation/AddAccommodation';
+import EditAccommodation from './Accommodation/EditAccommodation';
+import RestaurantList from './Restaurant/RestaurantList';
+import AddRestaurant from './Restaurant/AddRestaurant';
+import EditRestaurant from './Restaurant/EditRestaurant';
+import SpecialtyList from './Specialty/SpecialtyList';
+import AddSpecialty from './Specialty/AddSpecialty';
+import EditSpecialty from './Specialty/EditSpecialty';
+import ServiceList from './Service/ServiceList';
+import AddService from './Service/AddService';
+import EditService from './Service/EditService';
+import SouvenirList from './Souvenir/SouvenirList';
+import AddSouvenir from './Souvenir/AddSouvenir';
+import EditSouvenir from './Souvenir/EditSouvenir';
 
 const AdminPage = () => {
+  const { isAuthenticated } = useContext(AuthContext);
   const [currentView, setCurrentView] = useState('list'); // State để quản lý hiển thị các phần
   const [editId, setEditId] = useState(null); // State để lưu ID của đối tượng cần chỉnh sửa
   const [touristSpotId, setTouristSpotId] = useState(null); // State để lưu ID của TouristSpot
@@ -55,6 +58,10 @@ const AdminPage = () => {
       });
     };
   }, []);
+
+  if (!isAuthenticated) {
+    return <div>Loading...</div>; 
+  }
 
   const renderView = () => {
     switch (currentView) {
@@ -101,176 +108,102 @@ const AdminPage = () => {
 
   return (
     <div>
-      <div className="page-loader page-loader-active">
-        <div className="page-loader-content">
-          <div className="page-loader-logo">
-            <img src="/assets/dist/img/logo.png" alt="Logo" />
-          </div>
-          <div className="page-loader-progress">
-            <div className="page-loader-bar"></div>
-            <div className="page-loader-percent">0%</div>
-          </div>
-        </div>
-      </div>
       <div className="wrapper">
         <nav className="sidebar">
           <div className="sidebar-header">
-            <button style={{background:'none', border:'none'}} className="sidebar-brand" onClick={() => setCurrentView('list')}>
+            <button style={{background:'none', border:'none'}} className="sidebar-brand">
               <img className="sidebar-brand_icon" src="/assets/dist/img/mini-logo.png" alt="" />
-              <span className="sidebar-brand_text">List<span>On</span></span>
+              <span className="sidebar-brand_text">Admin</span>
             </button>
           </div>
           <div className="sidebar-body">
             <nav className="sidebar-nav">
               <ul className="metismenu">
-                <li className="nav-label">
-                  <span className="nav-label_text">Main Menu</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-three-dots nav-label_ellipsis m-auto" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                  </svg>
-                </li>
                 <li className="mm-active">
-                  <button onClick={() => setCurrentView('list')} className="btn btn-link">
-                  <i class="fa-solid fa-map-location-dot"></i>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list')}>
+                    <i className="fa-solid fa-map-location-dot"></i>
                     <span className="ms-2">Địa Điểm Du Lịch</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => {
-                    setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
-                    setCurrentView('list-accommodation');
-                  }} className="btn btn-link">
-                    <i class="fa-solid fa-bed"></i>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list-accommodation')}>
+                    <i className="fa-solid fa-bed"></i>
                     <span className="ms-2">Nơi Lưu Trú</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => {
-                    setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
-                    setCurrentView('list-restaurant');
-                  }} className="btn btn-link">
-                    <i class="fa-solid fa-utensils"></i>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list-restaurant')}>
+                    <i className="fa-solid fa-utensils"></i>
                     <span className="ms-2">Nhà Hàng</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => {
-                    setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
-                    setCurrentView('list-specialty');
-                  }} className="btn btn-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-box" viewBox="0 0 16 16">
-                      <path d="M8.6.522a1 1 0 0 0-1.2 0l-6 4.5A1 1 0 0 0 1 6.77V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6.77a1 1 0 0 0-.4-.748l-6-4.5zM8 1.634L13.26 5.5H2.74L8 1.634zM2 14V6.5h12V14H2z"/>
-                    </svg>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list-specialty')}>
+                    <i className="fa-solid fa-box"></i>
                     <span className="ms-2">Đặc Sản</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => {
-                    setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
-                    setCurrentView('list-service');
-                  }} className="btn btn-link">
-                    <i class="fa-solid fa-headset"></i>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list-service')}>
+                    <i className="fa-solid fa-headset"></i>
                     <span className="ms-2">Dịch Vụ</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => {
-                    setTouristSpotId('663b1a94256965034909de66'); // Cập nhật với ID chính xác
-                    setCurrentView('list-souvenir');
-                  }} className="btn btn-link">
-                    <i class="fa-solid fa-gift"></i>
+                  <button className="btn btn-link" onClick={() => setCurrentView('list-souvenir')}>
+                    <i className="fa-solid fa-gift"></i>
                     <span className="ms-2">Quà Lưu Niệm</span>
                   </button>
-                </li>
-                <li className="nav-label">
-                  <span className="nav-label_text">Account</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-three-dots nav-label_ellipsis m-auto" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                  </svg>
-                </li>
-                <li>
-                  <a href="../sign-up.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-headset" viewBox="0 0 16 16">
-                      <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
-                    </svg>
-                    <span className="ms-2">Support</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../sign-in.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                      <path fillRule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-                      <path fillRule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                    </svg>
-                    <span className="ms-2">Logout</span>
-                  </a>
                 </li>
               </ul>
             </nav>
           </div>
         </nav>
         <div className="content-wrapper">
-        <div className="main-content">
-               
-                <nav className="navbar-custom-menu navbar navbar-expand-xl m-0 navbar-transfarent">
+          <div className="main-content">
+          <nav class="navbar-custom-menu navbar navbar-expand-xl m-0 navbar-transfarent">
                     
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-expanded="true" aria-label="Toggle navigation"><span></span> <span></span></button>
-                      
-                        <form className="search" action="#" method="get">
-                            <div className="search__inner">
-                                <input type="text" class="search__text" placeholder="Search (Ctrl+/)"/>
-                                <svg data-sa-action="search-close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search search__helper" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                </svg>
-                                <span className="search-shortcode">(Ctrl+/)</span>
-                            </div>
-                        </form>
-                       
-                        
-                    </div>
-                    <div className="navbar-icon d-flex">
-                        <ul className="navbar-nav flex-row align-items-center">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#" id="btnFullscreen">
+                    <div class="navbar-icon d-flex">
+                        <ul class="navbar-nav flex-row align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" id="btnFullscreen">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen" viewBox="0 0 16 16">
                                         <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5" />
                                     </svg>
                                 </a>
                             </li>
-                            <li className="nav-item">
-                                <button className="nav-link dark-button">
+                            <li class="nav-item">
+                                <button class="nav-link dark-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
                                         <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278M4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" />
                                     </svg>
                                 </button>
                             </li>
-                            <li className="nav-item">
+                            <li class="nav-item">
                                 <button class="nav-link light-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
                                         <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
                                     </svg>
                                 </button>
                             </li>
-                            <li className="nav-item dropdown user-menu user-menu-custom">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div className="profile-element d-flex align-items-center flex-shrink-0 p-0 text-start">
-                                        <div className="avatar online">
+                            <li class="nav-item dropdown user-menu user-menu-custom">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="profile-element d-flex align-items-center flex-shrink-0 p-0 text-start">
+                                        <div class="avatar online">
                                             <img src="assets/dist/img/avatar/01.jpg" class="img-fluid rounded-circle" alt=""/>
                                         </div>
-                                        <div className="profile-text">
-                                            <h6 className="m-0 fw-medium fs-14">Naeem Khan</h6>
+                                        <div class="profile-text">
+                                            <h6 class="m-0 fw-medium fs-14">Naeem Khan</h6>
                                             <span>example@gmail.com</span>
                                         </div>
                                     </div>
                                 </a>
-                                <div className="dropdown-menu">
-                                    <div className="dropdown-header d-sm-none">
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-header d-sm-none">
                                         <a href="#" class="header-arrow"><i class="icon ion-md-arrow-back"></i></a>
                                     </div>
-                                    <div className="user-header">
-                                        <div className="img-user">
+                                    <div class="user-header">
+                                        <div class="img-user">
                                             <img src="assets/dist/img/avatar/01.jpg" alt=""/>
                                         </div>
                                         <h6>Naeem Khan</h6>
@@ -305,26 +238,24 @@ const AdminPage = () => {
                                         </svg>
                                         Sign Out</a>
                                 </div>
-                                
+                               
                             </li>
                         </ul>
                     </div>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i className="fa-solid fa-bars fs-18"></i>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa-solid fa-bars fs-18"></i>
                     </button>
                 </nav>
-          
-            {renderView()}
-        
-          <footer className="footer-content">
-            <div className="align-items-center d-flex footer-text gap-3 justify-content-between">
-              <div className="copy">© 2022 ListOn - All Rights Reserved</div>
-              <div className="credit">Developed by: <a href="/">ListOn</a> 🌺💚</div>
-            </div>
-          </footer>
-          <div className="overlay"></div>
+            {currentView === 'outlet' ? <Outlet /> : renderView()}
+            <footer className="footer-content">
+              <div className="align-items-center d-flex footer-text gap-3 justify-content-between">
+                <div className="copy">© 2022 Admin - All Rights Reserved</div>
+                <div className="credit">Developed by: <a href="/">Admin</a> 🌺💚</div>
+              </div>
+            </footer>
+            <div className="overlay"></div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

@@ -99,10 +99,10 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="col-sm-12">
-                  <div className="">
+                  <div className="d-flex justify-content-between">
                     <label className="required fw-medium mb-2">Hình Ảnh</label>
                     <input type="file" accept="image/*" onChange={handleImageChange} />
-                    {imagePreview && <img src={imagePreview} alt="Preview" />}
+                    {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
                 </div>
                 <div className="col-sm-12">

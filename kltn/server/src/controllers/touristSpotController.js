@@ -40,15 +40,34 @@ const updateTouristSpotById = async (req, res) => {
   const { id } = req.params;
   const updatedTouristSpot = req.body;
   try {
-    const result = await TouristSpot.findByIdAndUpdate(id, updatedTouristSpot, { new: true });
-    if (!result) {
+    const existingTouristSpot = await TouristSpot.findById(id);
+    if (!existingTouristSpot) {
       return res.status(404).json({ message: 'Không tìm thấy địa điểm du lịch để cập nhật' });
     }
+
+    // Bảo toàn các trường lồng nhau nếu chúng không được cung cấp trong yêu cầu
+    const updatedFields = {
+      name: updatedTouristSpot.name || existingTouristSpot.name,
+      description: updatedTouristSpot.description || existingTouristSpot.description,
+      address: updatedTouristSpot.address || existingTouristSpot.address,
+      image: updatedTouristSpot.image || existingTouristSpot.image,
+      category: updatedTouristSpot.category || existingTouristSpot.category,
+      google_map: updatedTouristSpot.google_map || existingTouristSpot.google_map,
+      accommodations: updatedTouristSpot.accommodations.length ? updatedTouristSpot.accommodations : existingTouristSpot.accommodations,
+      restaurants: updatedTouristSpot.restaurants.length ? updatedTouristSpot.restaurants : existingTouristSpot.restaurants,
+      specialties: updatedTouristSpot.specialties.length ? updatedTouristSpot.specialties : existingTouristSpot.specialties,
+      services: updatedTouristSpot.services.length ? updatedTouristSpot.services : existingTouristSpot.services,
+      souvenirs: updatedTouristSpot.souvenirs.length ? updatedTouristSpot.souvenirs : existingTouristSpot.souvenirs
+    };
+
+    const result = await TouristSpot.findByIdAndUpdate(id, updatedFields, { new: true });
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 // Controller function để xóa một địa điểm du lịch theo ID
 const deleteTouristSpotById = async (req, res) => {

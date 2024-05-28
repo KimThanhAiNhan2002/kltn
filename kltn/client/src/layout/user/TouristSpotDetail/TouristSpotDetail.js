@@ -60,103 +60,322 @@ const TouristSpotDetail = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{spot.name}</h1>
-      <img src={spot.image} alt={spot.name} className={styles.resultImage} />
-      <p className={styles.description}>Mô tả: <div dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div></p>
-      <p className={styles.address}>Địa chỉ: {spot.address}</p>
-      <p className={styles.category}>Loại hình: {spot.category}</p>
-      <a href={spot.google_map} target="_blank" rel="noopener noreferrer" className={styles.mapLink}>Xem trên Google Maps</a>
+    <div class="py-5 bg-light m-3 rounded-4">
+      <div class="container py-4">
+        <div class="row" style={{ justifyContent: 'space-evenly' }}>
+          <div class="col-lg-4 sidebar">
+            <img src={spot.image} style={{ borderTopRightRadius: '1em', borderTopLeftRadius: '1em' }} class="bg-cover border-0 bg-no-repeat js-bg-image overflow-hidden profile-card_bg--img start-0 top-0 w-100" />
 
-      <h2 className={styles.sectionTitle}>Khách sạn</h2>
-      <div className={styles.grid}>
-        {spot.accommodations.length > 0 ? (
-          spot.accommodations.map((accommodation, index) => (
-            <div key={index} className={styles.card}>
-              <img src={accommodation.image} alt={accommodation.name} className={styles.resultImage} />
-              <h3>{accommodation.name}</h3>
-              <Description content={accommodation.description} />
-              <p>Giá: {accommodation.price}</p>
-              <p>Địa chỉ: {accommodation.address}</p>
-              <p>Số điện thoại: {accommodation.phone_number}</p>
-              <a href={accommodation.google_map} target="_blank" rel="noopener noreferrer">Xem trên Google Maps</a>
+            <div style={{ borderBottomRightRadius: '1em', borderBottomLeftRadius: '1em' }} class=" border-0 p-4 position-relative profile-card shadow-sm text-center">
+
+
+
+              <h3 class="profile-card__name">{spot.name}</h3>
+              <div class="mb-5">
+
+
+                <div class="border-bottom border-top py-3 fs-15">
+                  <div class="align-items-center d-flex justify-content-between">
+                    <span style={{ width: '30%' }} class="text-muted">Địa chỉ:</span>
+                    <span style={{ width: '67%' }} class="fw-semibold">{spot.address}</span>
+                  </div>
+
+                </div>
+                <div class="border-bottom py-3 fs-15">
+                  <div class="align-items-center d-flex justify-content-between mb-2">
+                    <span style={{ width: '30%' }} class="text-muted">Loại hình: </span>
+                    <span style={{ width: '67%' }} class="fw-semibold">{spot.category}</span>
+                  </div>
+
+                </div>
+                <div class="border-bottom py-3 fs-15">
+                  <div class="align-items-center d-flex justify-content-between mb-2">
+                    <span class="text-muted">Google Map: </span>
+                    <span class="fw-semibold"><a href={spot.google_map} target="_blank" rel="noopener noreferrer">Xem trên Google Maps</a></span>
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
-          ))
-        ) : (
-          <p>Khách sạn của địa điểm đang cập nhật</p>
-        )}
-      </div>
+          </div>
+          <div class="col-lg-8 ps-xxl-5">
+            <div class="border-0 card listing-form p-4 rounded-4 shadow-sm">
+              <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+                <h4 class="fw-semibold fs-2">Mô tả </h4>
 
-      <h2 className={styles.sectionTitle}>Nhà hàng</h2>
-      <div className={styles.grid}>
-        {spot.restaurants.length > 0 ? (
-          spot.restaurants.map((restaurant, index) => (
-            <div key={index} className={styles.card}>
-              <img src={restaurant.image} alt={restaurant.name} className={styles.resultImage} />
-              <h3>{restaurant.name}</h3>
-              <Description content={restaurant.description} />
-              <p>Giá: {restaurant.price}</p>
-              <p>Địa chỉ: {restaurant.address}</p>
-              <p>Số điện thoại: {restaurant.phone_number}</p>
-              <a href={restaurant.google_map} target="_blank" rel="noopener noreferrer">Xem trên Google Maps</a>
+              </div>
+              <div class="align-items-sm-center rounded-3">
+                <div dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div>
+              </div>
             </div>
-          ))
-        ) : (
-          <p>Nhà hàng của địa điểm đang cập nhật</p>
-        )}
-      </div>
 
-      <h2 className={styles.sectionTitle}>Đặc sản</h2>
-      <div className={styles.grid}>
-        {spot.specialties.length > 0 ? (
-          spot.specialties.map((specialty, index) => (
-            <div key={index} className={styles.card}>
-              <img src={specialty.image} alt={specialty.name} className={styles.resultImage} />
-              <h3>{specialty.name}</h3>
-              <Description content={specialty.description} />
-              <p>Giá: {specialty.price}</p>
-              <p>Xuất xứ: {specialty.origin}</p>
-              <p>Hạn sử dụng: {specialty.expired}</p>
-            </div>
-          ))
-        ) : (
-          <p>Đặc sản của địa điểm đang cập nhật</p>
-        )}
+          </div>
+        </div>
       </div>
+      <div class="container py-4">
+        <div class="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
+          <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+            <h4 className={styles.sectionTitle} class="fw-semibold fs-2">Khách sạn</h4>
+            <p class="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br class="d-none d-lg-block" /> available, but the majority have</p>
+          </div>
+          <div class="row g-4">
+            {spot.accommodations.length > 0 ? (
+              spot.accommodations.map((accommodation, index) => (
+                <div class="col-sm-6 d-flex" key={index}>
+                  <div class="card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg">
+                    <a ></a>
 
-      <h2 className={styles.sectionTitle}>Dịch vụ</h2>
-      <div className={styles.grid}>
-        {spot.services.length > 0 ? (
-          spot.services.map((service, index) => (
-            <div key={index} className={styles.card}>
-              <img src={service.image} alt={service.name} className={styles.resultImage} />
-              <h3>{service.name}</h3>
-              <Description content={service.description} />
-              <p>Giá: {service.price}</p>
-            </div>
-          ))
-        ) : (
-          <p>Dịch vụ của địa điểm đang cập nhật</p>
-        )}
+                    <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
+                      <img src={accommodation.image} alt={accommodation.name} style={{ height: '350px', width: '520px' }} />
+                      <div class="bg-blur card-badge d-inline-block position-absolute start-0 text-white z-2"><i class="fa-solid fa-tag"></i>{accommodation.price}</div>
+                      <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
+
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column h-100 position-relative p-3">
+                      <div class="align-items-center bg-primary cat-icon d-flex justify-content-center position-absolute rounded-circle text-white"><i class="fa-solid fa-shop"></i></div>
+                      <div class="align-items-center d-flex flex-wrap gap-1 text-primary card-start mb-1">
+                      </div>
+
+                      <h4 class="fs-18 fw-semibold mb-0" className={styles.title}>
+                        {accommodation.name}
+                      </h4>
+                      <Description content={accommodation.description} />
+                      <div class="d-flex flex-wrap gap-3 mt-2 z-1">
+                        <a href="tel:+4733378901" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                          </svg>
+                          <span>{accommodation.phone_number}</span>
+                        </a>
+                        <a href="#" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" class="bi bi-compass" viewBox="0 0 16 16">
+                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                          </svg>
+                          <span>{accommodation.address}</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              ))
+            ) : (
+              <p>Khách sạn của địa điểm đang cập nhật</p>
+            )}
+
+          </div>
+        </div>
       </div>
+      <div class="container py-4">
+        <div class="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
+          <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+            <h4 class="fw-semibold fs-2">Nhà hàng</h4>
+            <p class="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br class="d-none d-lg-block" /> available, but the majority have</p>
+          </div>
+          <div class="row g-4">
+            {spot.restaurants.length > 0 ? (
+              spot.restaurants.map((restaurant, index) => (
+                <div class="col-sm-6 d-flex" key={index}>
+                  <div class="card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg">
+                    <a href="listing-details.html" class="stretched-link"></a>
 
-      <h2 className={styles.sectionTitle}>Quà lưu niệm</h2>
-      <div className={styles.grid}>
-        {spot.souvenirs.length > 0 ? (
-          spot.souvenirs.map((souvenir, index) => (
-            <div key={index} className={styles.card}>
-              <img src={souvenir.image} alt={souvenir.name} className={styles.resultImage} />
-              <h3>{souvenir.name}</h3>
-              <Description content={souvenir.description} />
-              <p>Giá: {souvenir.price}</p>
-            </div>
-          ))
-        ) : (
-          <p>Quà lưu niệm của địa điểm đang cập nhật</p>
-        )}
+                    <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
+                      <img src={restaurant.image} alt={restaurant.name} style={{ height: '350px', width: '520px' }} />
+                      <div class="bg-blur card-badge d-inline-block position-absolute start-0 text-white z-2"><i class="fa-solid fa-tag"></i>{restaurant.price}</div>
+                      <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
+
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column h-100 position-relative p-3">
+                      <div class="align-items-center bg-primary cat-icon d-flex justify-content-center position-absolute rounded-circle text-white"><i class="fa-solid fa-shop"></i></div>
+                      <div class="align-items-center d-flex flex-wrap gap-1 text-primary card-start mb-1">
+                      </div>
+
+                      <h4 class="fs-18 fw-semibold mb-0">
+                        {restaurant.name}
+                      </h4>
+                      
+                      <div class="d-flex flex-wrap gap-3 mt-2 z-1">
+                        <a href="tel:+4733378901" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                          </svg>
+                          <span>{restaurant.phone_number}</span>
+                        </a>
+                        <a href="#" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" class="bi bi-compass" viewBox="0 0 16 16">
+                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                          </svg>
+                          <span>{restaurant.address}</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              ))
+            ) : (
+              <p>Nhà hàng của địa điểm đang cập nhật</p>
+            )}
+
+          </div>
+        </div>
       </div>
+      <div class="container py-4">
+        <div class="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
+          <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+            <h4 class="fw-semibold fs-2">Đặc sản</h4>
+            <p class="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br class="d-none d-lg-block" /> available, but the majority have</p>
+          </div>
+          <div class="row g-4">
+            {spot.specialties.length > 0 ? (
+              spot.specialties.map((specialty, index) => (
+                <div class="col-sm-6 d-flex" key={index}>
+                  <div class="card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg">
+                    <a href="listing-details.html" class="stretched-link"></a>
 
-      {showModal && (
+                    <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
+                      <img src={specialty.image} alt={specialty.name} style={{ height: '350px', width: '520px' }} />
+                      <div class="bg-blur card-badge d-inline-block position-absolute start-0 text-white z-2"><i class="fa-solid fa-tag"></i>{specialty.price}</div>
+                      <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
+
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column h-100 position-relative p-3">
+                      <div class="align-items-center bg-primary cat-icon d-flex justify-content-center position-absolute rounded-circle text-white"><i class="fa-solid fa-shop"></i></div>
+                      <div class="align-items-center d-flex flex-wrap gap-1 text-primary card-start mb-1">
+                      </div>
+
+                      <h4 class="fs-18 fw-semibold mb-0">
+                        {specialty.name}
+                      </h4>
+                      <div class="d-flex flex-wrap gap-3 mt-2 z-1">
+                        <a href="tel:+4733378901" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                          </svg>
+                          <span>{specialty.origin}</span>
+                        </a>
+                        <a href="#" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" class="bi bi-compass" viewBox="0 0 16 16">
+                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                          </svg>
+                          <span>{specialty.expired}</span>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              ))
+            ) : (
+              <p>Khách sạn của địa điểm đang cập nhật</p>
+            )}
+
+          </div>
+        </div>
+      </div>
+      <div class="container py-4">
+        <div class="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
+          <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+            <h4 class="fw-semibold fs-2">Dịch vụ</h4>
+            <p class="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br class="d-none d-lg-block" /> available, but the majority have</p>
+          </div>
+          <div class="row g-4">
+            {spot.services.length > 0 ? (
+              spot.services.map((service, index) => (
+                <div class="col-sm-6 d-flex" key={index}>
+                  <div class="card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg">
+                    <a href="listing-details.html" class="stretched-link"></a>
+
+                    <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
+                      <img src={service.image} alt={service.name} style={{ height: '350px', width: '520px' }} />
+                      <div class="bg-blur card-badge d-inline-block position-absolute start-0 text-white z-2"><i class="fa-solid fa-tag"></i>{service.price}</div>
+                      <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
+
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column h-100 position-relative p-3">
+                      <div class="align-items-center bg-primary cat-icon d-flex justify-content-center position-absolute rounded-circle text-white"><i class="fa-solid fa-shop"></i></div>
+                      <div class="align-items-center d-flex flex-wrap gap-1 text-primary card-start mb-1">
+                      </div>
+
+                      <h4 class="fs-18 fw-semibold mb-0">
+                        {service.name}
+                      </h4>
+                      <div class="d-flex flex-wrap gap-3 mt-2 z-1">
+                        
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              ))
+            ) : (
+              <p>Dịch vụ của địa điểm đang cập nhật</p>
+            )}
+
+          </div>
+        </div>
+      </div>
+      <div class="container py-4">
+        <div class="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
+          <div class="align-items-sm-center bg-light mb-4 p-4 rounded-3">
+            <h4 class="fw-semibold fs-2">Quà lưu niệm</h4>
+            <p class="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br class="d-none d-lg-block" /> available, but the majority have</p>
+          </div>
+          <div class="row g-4">
+            {spot.souvenirs.length > 0 ? (
+              spot.souvenirs.map((souvenir, index) => (
+                <div class="col-sm-6 d-flex" key={index}>
+                  <div class="card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg">
+                    <a href="listing-details.html" class="stretched-link"></a>
+
+                    <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
+                      <img src={souvenir.image} alt={souvenir.name} style={{ height: '350px', width: '520px' }} />
+                      <div class="bg-blur card-badge d-inline-block position-absolute start-0 text-white z-2"><i class="fa-solid fa-tag"></i>{souvenir.price}</div>
+                      <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
+
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column h-100 position-relative p-3">
+                      <div class="align-items-center bg-primary cat-icon d-flex justify-content-center position-absolute rounded-circle text-white"><i class="fa-solid fa-shop"></i></div>
+                      <div class="align-items-center d-flex flex-wrap gap-1 text-primary card-start mb-1">
+                      </div>
+
+                      <h4 class="fs-18 fw-semibold mb-0">
+                        {souvenir.name}
+                      </h4>
+                      <div class="d-flex flex-wrap gap-3 mt-2 z-1">
+                        
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              ))
+            ) : (
+              <p>Quà lưu niệm của địa điểm đang cập nhật</p>
+            )}
+
+          </div>
+          {showModal && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <span className={styles.close} onClick={closeModal}>&times;</span>
@@ -164,6 +383,10 @@ const TouristSpotDetail = () => {
           </div>
         </div>
       )}
+    </div>
+
+       
+      </div>
     </div>
   );
 };

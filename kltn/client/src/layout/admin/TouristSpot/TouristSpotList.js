@@ -8,12 +8,16 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
   const itemsPerPage = 5;
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         const data = await getTouristSpots();
+        console.log(data);
+
         setTouristSpots(data);
       } catch (error) {
         console.error('Error fetching tourist spots:', error);
+         console.log("1234");  
       }
     };
     fetchData();
@@ -22,7 +26,7 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
   const handleDelete = async (id) => {
     try {
       await deleteTouristSpot(id);
-      setTouristSpots(touristSpots.filter(spot => spot._id !== id));
+      setTouristSpots(touristSpots?.filter(spot => spot._id !== id));
       alert('Đã xóa địa điểm du lịch thành công');
     } catch (error) {
       console.error('Error deleting tourist spot:', error);
@@ -41,7 +45,7 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = touristSpots.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = touristSpots?.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(touristSpots.length / itemsPerPage);
 
   return (
@@ -63,7 +67,7 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
             </button>
           </div>
         </div>
-        {currentItems.map((spot) => (
+        {currentItems?.map((spot) => (
           <div
             key={spot._id}
             className="border-0 card card-hover flex-fill overflow-hidden rounded-3 shadow-sm w-100 card-hover-bg mb-3"
@@ -129,11 +133,11 @@ const TouristSpotList = ({ setCurrentView, setEditId }) => {
 
                     <div className="d-flex flex-column gap-3 gap-lg-2 gap-xl-3 mt-auto z-1">
                       <a href={`tel:${spot.phone_number}`} className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                        <i class="fa-solid fa-location-dot"></i>
+                        <i className="fa-solid fa-location-dot"></i>
                         <span>Địa chỉ: {spot.address}</span>
                       </a>
                       <a className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                      <i class="fa-solid fa-list"></i>                        
+                      <i className="fa-solid fa-list"></i>                        
                       <span>Danh mục: {spot.category}</span>
                       </a>
                     </div>

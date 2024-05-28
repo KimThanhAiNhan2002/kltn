@@ -147,7 +147,9 @@
     margin-top: 28px;
     text-align: center;
 }
-
+.image-all{
+    width:50%;
+}
 .page-loader.page-loader-active {
     pointer-events: all;
     height: 100%;

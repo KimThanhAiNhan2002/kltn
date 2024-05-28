@@ -116,9 +116,9 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="col-sm-12">
-                  <div className="">
+                  <div className="d-flex justify-content-between">
                     <label className="required fw-medium mb-2">Hình Ảnh</label>
-                    <input type="file" accept="image/*" onChange={handleImageChange} required />
+                    <input className="image-all" type="file" accept="image/*" onChange={handleImageChange} required />
                     {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
                   </div>
                 </div>

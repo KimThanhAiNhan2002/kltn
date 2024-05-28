@@ -20,6 +20,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
   });
 
   const [imagePreview, setImagePreview] = useState(null);
+  const [CKEditorContent, setCKEditorContent] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
         const data = await getTouristSpotById(editId);
         setFormData(data);
         setImagePreview(data.image);
+        setCKEditorContent(data.description);
       } catch (error) {
         console.error(error);
       }
@@ -65,6 +67,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
 
   const handleDescriptionChange = (event, editor) => {
     const data = editor.getData();
+    setCKEditorContent(data);
     setFormData({
       ...formData,
       description: data
@@ -151,7 +154,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                     <label className="required fw-medium mb-2">Description</label>
                     <CKEditor
                       editor={ClassicEditor}
-                      data={formData.description}
+                      data={CKEditorContent}
                       onChange={handleDescriptionChange}
                       config={{
                         extraPlugins: [MyCustomUploadAdapterPlugin],
@@ -164,10 +167,10 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                   </div>
                 </div>
                 <div className="col-sm-12">
-                  <div className="">
+                  <div className="d-flex justify-content-between">
                     <label className="required fw-medium mb-2">Hình Ảnh</label>
                     <input type="file" accept="image/*" onChange={handleImageChange} />
-                    {imagePreview && <img src={imagePreview} alt="Preview" />}
+                    {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
                 </div>
                 <div className="col-sm-12">

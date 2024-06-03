@@ -5,13 +5,17 @@ import {
   createTouristSpot,
   updateTouristSpotById,
   deleteTouristSpotById,
-  searchTouristSpots
+  searchTouristSpots,
+  searchTouristSpotsByAddress // Thêm dòng này
 } from '../controllers/touristSpotController';
 
 const router = express.Router();
 
 // Route để tìm kiếm địa điểm du lịch theo tên
 router.get('/search', searchTouristSpots);
+
+// Route để tìm kiếm địa điểm du lịch theo địa chỉ
+router.get('/searchByAddress', searchTouristSpotsByAddress); // Thêm dòng này
 
 // Các route khác...
 router.get('/tourist-spots', getAllTouristSpots);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getSpecialtyById, updateSpecialty } from '../../../api/specialtiesApi';
-import "./Specialty.css";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import './Specialty.css';
 
 const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
   const [specialty, setSpecialty] = useState({
@@ -12,12 +14,14 @@ const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
     image: ''
   });
   const [imagePreview, setImagePreview] = useState(null);
+  const [CKEditorContent, setCKEditorContent] = useState('');
 
   const fetchSpecialty = useCallback(async () => {
     try {
       const data = await getSpecialtyById(editId);
       setSpecialty(data);
       setImagePreview(data.image); // Hiển thị ảnh hiện tại
+      setCKEditorContent(data.description);
     } catch (error) {
       console.error('Lỗi khi lấy thông tin đặc sản:', error);
     }
@@ -55,6 +59,15 @@ const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
     }
   };
 
+  const handleDescriptionChange = (event, editor) => {
+    const data = editor.getData();
+    setCKEditorContent(data);
+    setSpecialty({
+      ...specialty,
+      description: data
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,6 +79,40 @@ const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
       alert('Có lỗi xảy ra khi cập nhật đặc sản');
     }
   };
+
+  // Hàm upload adapter
+  const CustomUploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return loader.file
+          .then(file => new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('http://localhost:5000/api/image/upload', { // Đường dẫn đến API upload
+              method: 'POST',
+              body: formData
+            })
+              .then(response => response.json())
+              .then(result => {
+                resolve({
+                  default: result.imageUrl
+                });
+              })
+              .catch(error => {
+                reject(error);
+              });
+          }));
+      }
+    };
+  };
+
+  // Hàm thêm adapter cho editor
+  function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return CustomUploadAdapter(loader);
+    };
+  }
 
   return (
     <div className="body-content">
@@ -94,7 +141,18 @@ const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
                 <div className="col-sm-12">
                   <div className="">
                     <label className="required fw-medium mb-2">Mô Tả</label>
-                    <textarea className="form-control" name="description" rows="7" value={specialty.description} onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={CKEditorContent}
+                      onChange={handleDescriptionChange}
+                      config={{
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        simpleUpload: {
+                          uploadUrl: 'http://localhost:5000/api/image/upload',
+                          headers: { }
+                        }
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-6">
@@ -110,10 +168,10 @@ const EditSpecialty = ({ setCurrentView, editId, touristSpotId }) => {
                   </div>
                 </div>
                 <div className="col-sm-12">
-                  <div className="">
-                    <label className="required fw-medium mb-2">Hình Ảnh</label>
-                    <input type="file" accept="image/*" onChange={handleImageChange} required />
-                    {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
+                  <label className="required fw-medium mb-2">Hình Ảnh</label>
+                  <div className="d-flex justify-content-between alight-item-center">   
+                    <input  type="file" accept="image/*" onChange={handleImageChange} />
+                    {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
                 </div>
                 <div className="text-center">

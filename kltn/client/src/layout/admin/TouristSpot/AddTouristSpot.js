@@ -112,7 +112,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
         <div className="container-xxl">
           <div className="card mb-4">
             <div className="card-header position-relative">
-              <h6 className="fs-17 fw-semi-bold mb-0">Basic Informations</h6>
+              <h6 className="fs-17 fw-semi-bold mb-0">Thêm Địa Điểm Du Lịch</h6>
             </div>
             <div className="card-body">
               <div className="row g-4">
@@ -124,7 +124,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
                 </div>
                 <div className="col-sm-6">
                   <div className="">
-                    <label className="required fw-medium mb-2">Category</label>
+                    <label className="required fw-medium mb-2">Danh Mục</label>
                     <select className="form-select" name="category" onChange={handleChange}>
                       <option value="Category">Category</option>
                       <option value="Restaurant">Restaurant</option>
@@ -135,7 +135,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="">
-                    <label className="required fw-medium mb-2">Description</label>
+                    <label className="required fw-medium mb-2">Mô Tả</label>
                     <CKEditor
                       editor={ClassicEditor}
                       data={formData.description}
@@ -152,7 +152,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="d-flex justify-content-between">
-                    <label className="required fw-medium mb-2">Image</label>
+                    <label className="required fw-medium mb-2">Hình ảnh</label>
                     <input type="file" accept="image/*" onChange={handleImageChange} required />
                     {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
@@ -170,7 +170,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Add New</button>
+                  <button type="submit" className="btn btn-primary-soft"><i className="fa fa-plus me-2"></i>Thêm Địa Điểm Du Lịch</button>
                 </div>
               </div>
             </div>

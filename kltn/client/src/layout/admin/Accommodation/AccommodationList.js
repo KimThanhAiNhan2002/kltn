@@ -83,7 +83,7 @@ const AccommodationList = ({ setCurrentView, setEditId, setTouristSpotId }) => {
               <div className="g-0 h-100 row">
                 <div className="col-lg-3 col-md-5 col-sm-4 col-xxl-2 position-relative">
                   <div className="card-image-hover dark-overlay h-100 overflow-hidden position-relative">
-                    <img src={accommodation.image} alt={accommodation.name} className="image-tour" />
+                    <img style={{width:'223px', height:'239px'}}  src={accommodation.image} alt={accommodation.name} className="image-tour" />
                   </div>
                 </div>
                 <div className="col-lg-9 col-md-7 col-sm-8 col-xxl-10 p-3 p-lg-4 p-md-3 p-sm-4">

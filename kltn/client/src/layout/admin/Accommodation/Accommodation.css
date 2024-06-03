@@ -192,18 +192,7 @@
   margin-bottom: 20px;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-}
 
-.card-body .description {
-  -webkit-line-clamp: 3;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .pagination a, .pagination span {
   margin: 0 5px;
@@ -221,4 +210,20 @@
 
 .page-numbers {
   display: flex;
+}
+.card-body .description {
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-body .description figure.image {
+  display: none;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
 }

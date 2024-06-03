@@ -11,7 +11,12 @@ import TouristSpotList from './layout/admin/TouristSpot/TouristSpotList';
 import AccommodationList from './layout/admin/Accommodation/AccommodationList';
 import AddAccommodation from './layout/admin/Accommodation/AddAccommodation';
 import EditAccommodation from './layout/admin/Accommodation/EditAccommodation';
-import TouristSpotDetail from './layout/user/TouristSpotDetail/TouristSpotDetail';
+import TouristSpotDetail from './layout/user/Detail/TouristSpotDetail/TouristSpotDetail';
+import AccommodationDetail from './layout/user/Detail/AccommodationDetail/AccommodationDetail';
+import RestaurantDetail from './layout/user/Detail/RestaurantDetail/RestaurantDetail';
+import SpecialtyDetail from './layout/user/Detail/SpecialtyDetail/SpecialtyDetail';
+import ServiceDetail from './layout/user/Detail/ServiceDetail/ServiceDetail';
+import SouvenirDetail from './layout/user/Detail/SouvenirDetail/SouvenirDetail';
 import Login from './login/login';
 import AuthProvider from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
@@ -38,6 +43,11 @@ const App = () => {
             <Route path="/admin/accommodation-list/:touristSpotId" element={<AccommodationList />} />
           </Route>
           <Route path="/touristSpots/:id" element={<TouristSpotDetail />} />
+          <Route path="/accommodations/:id/:index" element={<AccommodationDetail />} />
+          <Route path="/restaurants/:id/:index" element={<RestaurantDetail />} />
+          <Route path="/specialties/:id/:index" element={<SpecialtyDetail />} />
+          <Route path="/services/:id/:index" element={<ServiceDetail />} />
+          <Route path="/souvenirs/:id/:index" element={<SouvenirDetail />} />
         </Routes>
         {isNotAdminPage && isNotLoginPage && <Footer />}
       </AuthProvider>

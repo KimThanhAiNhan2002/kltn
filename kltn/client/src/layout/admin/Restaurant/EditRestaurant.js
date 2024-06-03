@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getRestaurantById, updateRestaurant } from '../../../api/restaurantApi';
-import "./Restaurant.css";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import './Restaurant.css';
 
 const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
   const [restaurant, setRestaurant] = useState({
@@ -13,12 +15,14 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
     google_map: ''
   });
   const [imagePreview, setImagePreview] = useState(null);
+  const [CKEditorContent, setCKEditorContent] = useState('');
 
   const fetchRestaurant = useCallback(async () => {
     try {
       const data = await getRestaurantById(editId);
       setRestaurant(data);
       setImagePreview(data.image); // Hiển thị ảnh hiện tại
+      setCKEditorContent(data.description);
     } catch (error) {
       console.error('Lỗi khi lấy thông tin nhà hàng:', error);
     }
@@ -56,6 +60,15 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
     }
   };
 
+  const handleDescriptionChange = (event, editor) => {
+    const data = editor.getData();
+    setCKEditorContent(data);
+    setRestaurant({
+      ...restaurant,
+      description: data
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,6 +80,40 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
       alert('Có lỗi xảy ra khi cập nhật nhà hàng');
     }
   };
+
+  // Hàm upload adapter
+  const CustomUploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return loader.file
+          .then(file => new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('http://localhost:5000/api/image/upload', { // Đường dẫn đến API upload
+              method: 'POST',
+              body: formData
+            })
+              .then(response => response.json())
+              .then(result => {
+                resolve({
+                  default: result.imageUrl
+                });
+              })
+              .catch(error => {
+                reject(error);
+              });
+          }));
+      }
+    };
+  };
+
+  // Hàm thêm adapter cho editor
+  function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return CustomUploadAdapter(loader);
+    };
+  }
 
   return (
     <div className="body-content">
@@ -95,7 +142,18 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
                 <div className="col-sm-12">
                   <div className="">
                     <label className="required fw-medium mb-2">Mô Tả</label>
-                    <textarea className="form-control" name="description" rows="7" value={restaurant.description} onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={CKEditorContent}
+                      onChange={handleDescriptionChange}
+                      config={{
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        simpleUpload: {
+                          uploadUrl: 'http://localhost:5000/api/image/upload',
+                          headers: { }
+                        }
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-12">

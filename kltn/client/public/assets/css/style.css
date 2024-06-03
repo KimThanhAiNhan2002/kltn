@@ -5050,3 +5050,12 @@ hr {
 .News__Detail__Content .image img{
     width: 100%;
 }
+
+
+  .News__Detail__Content p img {
+    max-width: 688px; 
+    width: 100%; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }

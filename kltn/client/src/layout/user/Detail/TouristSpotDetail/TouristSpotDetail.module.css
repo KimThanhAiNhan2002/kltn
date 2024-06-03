@@ -115,6 +115,7 @@
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 20px;
+  z-index: 1000;
 }
 
 .modalContent {
@@ -138,10 +139,24 @@
   cursor: pointer;
 }
 
-.News__Detail__Content {
-  text-align: justify;
-  margin: 20px 0;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
+.News__Detail__Content img {
+  max-width: 688px; 
+  width: 100%; 
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
+.News__Detail__Content p img {
+  max-width: 688px; 
+  width: 100%; 
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.News__Detail__Content {
+  overflow: hidden; 
+  word-wrap: break-word; 
+}
+
+

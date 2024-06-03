@@ -38,38 +38,26 @@ const Login = () => {
                 <div class="mb-5">
                     <h2 class="display-6 fw-semibold mb-3">Welcome back! Please <span class="font-caveat text-primary">Sign in</span> to continue.</h2>
                     <p class="mb-0">Unlock a world of exclusive content, enjoy special offers, and be the first to dive into exciting news and updates by joining our community!</p>
-                </div>
-             
-              
-                
-             
+                </div>            
                 <form onSubmit={handleLogin} class="register-form">
                   
                     <div class="form-group mb-4">
-                        <label class="required">Enter Email</label>
+                        <label class="required">Tên Tài Khoản</label>
                         <input style={{background:'white'}} type="text"  value={username} onChange={(e) => setUsername(e.target.value)} class="form-control "/>
                         <div class="invalid-feedback text-start">Enter your valid email</div>
                     </div>
                    
                     <div class="form-group mb-4">
-                        <label class="required">Password</label>
+                        <label class="required">Mật Khẩu</label>
                         <input style={{background:'white'}} id="password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" class="form-control password" autocomplete="off"/>
                         <i data-bs-toggle="#password" class="fa-regular fa-eye-slash toggle-password"></i>
                     </div>
                    
-                    <div class="form-check mb-4 text-start">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                        <label class="form-check-label" for="flexCheckDefault">Remember me next time</label>
-                    </div>
                    
-                    <button type="submit" class="btn btn-primary btn-lg w-100">Sign Up</button>
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Đăng Nhập</button>
                   
                 </form>
                
-                <div class="bottom-text text-center mt-4"> Don't have an account? <a href="sign-up.html" class="fw-medium text-decoration-underline">Sign In</a>
-                    <br/> Remind <a href="forgot-password.html" class="fw-medium text-decoration-underline">Password</a>
-                </div>
-                
             </div>
         </div>
        

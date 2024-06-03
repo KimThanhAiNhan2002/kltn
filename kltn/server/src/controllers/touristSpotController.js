@@ -82,11 +82,25 @@ const deleteTouristSpotById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+// Controller function để tìm kiếm địa điểm du lịch theo tên
 const searchTouristSpots = async (req, res) => {
   const { query } = req.query;
   try {
     const results = await TouristSpot.find({
       name: { $regex: query, $options: 'i' }
+    });
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Controller function để tìm kiếm địa điểm du lịch theo địa chỉ
+const searchTouristSpotsByAddress = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const results = await TouristSpot.find({
+      address: { $regex: query, $options: 'i' }
     });
     res.status(200).json(results);
   } catch (error) {
@@ -100,5 +114,6 @@ export {
   createTouristSpot,
   updateTouristSpotById,
   deleteTouristSpotById,
-  searchTouristSpots
+  searchTouristSpots,
+  searchTouristSpotsByAddress
 };

@@ -23,6 +23,7 @@ export const getAllAccommodations = async () => {
   }
 };
 
+
 export const getAccommodationById = async (accommodationId) => {
   try {
     const response = await axios.get(`${API_URL}/accommodations/${accommodationId}`);

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { addAccommodation } from '../../../api/accommodationsApi';
 import { getTouristSpots } from '../../../api/touristSpotsApi';
-import "./Accommodation.css";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import './Accommodation.css';
 
 const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
   const [accommodation, setAccommodation] = useState({
@@ -56,6 +58,14 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
     }
   };
 
+  const handleDescriptionChange = (event, editor) => {
+    const data = editor.getData();
+    setAccommodation({
+      ...accommodation,
+      description: data
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,6 +77,40 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
       alert('Có lỗi xảy ra khi thêm nơi lưu trú');
     }
   };
+
+  // Hàm upload adapter
+  const CustomUploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return loader.file
+          .then(file => new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('http://localhost:5000/api/image/upload', { // Đường dẫn đến API upload
+              method: 'POST',
+              body: formData
+            })
+              .then(response => response.json())
+              .then(result => {
+                resolve({
+                  default: result.imageUrl
+                });
+              })
+              .catch(error => {
+                reject(error);
+              });
+          }));
+      }
+    };
+  };
+
+  // Hàm thêm adapter cho editor
+  function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return CustomUploadAdapter(loader);
+    };
+  }
 
   return (
     <div className="body-content">
@@ -112,16 +156,28 @@ const AddAccommodation = ({ setCurrentView, touristSpotId }) => {
                 <div className="col-sm-12">
                   <div className="">
                     <label className="required fw-medium mb-2">Mô Tả</label>
-                    <textarea className="form-control" name="description" rows="7" onChange={handleChange} placeholder="Please enter up to 4000 characters."></textarea>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={accommodation.description}
+                      onChange={handleDescriptionChange}
+                      config={{
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        simpleUpload: {
+                          uploadUrl: 'http://localhost:5000/api/image/upload',
+                          headers: { }
+                        }
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-12">
                   <div className="d-flex justify-content-between">
-                    <label className="required fw-medium mb-2">Hình Ảnh</label>
-                    <input className="image-all" type="file" accept="image/*" onChange={handleImageChange} required />
-                    {imagePreview && <img src={imagePreview} alt="Xem trước hình ảnh" />}
+                    <label className="required fw-medium mb-2">Hình ảnh</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} required />
+                    {imagePreview && <img className="image-all" src={imagePreview} alt="Preview" />}
                   </div>
                 </div>
+                
                 <div className="col-sm-12">
                   <div className="">
                     <label className="required fw-medium mb-2">Địa Chỉ</label>

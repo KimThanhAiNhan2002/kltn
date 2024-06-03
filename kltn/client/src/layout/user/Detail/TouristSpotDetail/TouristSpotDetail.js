@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import styles from './TouristSpotDetail.module.css';
 
 const TouristSpotDetail = () => {
@@ -7,6 +7,7 @@ const TouristSpotDetail = () => {
   const [spot, setSpot] = useState(null);
   const [modalContent, setModalContent] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSpot = async () => {
@@ -59,6 +60,11 @@ const TouristSpotDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const handleGoogleMapClick = () => {
+    const coordinates = JSON.parse(spot.google_map);
+    navigate(`/home_map?longitude=${coordinates[0]}&latitude=${coordinates[1]}`);
+  };
+
   return (
     <div className="py-5 bg-light m-3 rounded-4">
       <div className="container py-4">
@@ -84,7 +90,7 @@ const TouristSpotDetail = () => {
                 <div className="border-bottom py-3 fs-15">
                   <div className="align-items-center d-flex justify-content-between mb-2">
                     <span className="text-muted">Google Map: </span>
-                    <span className="fw-semibold"><a href={spot.google_map} target="_blank" rel="noopener noreferrer">Xem trên Google Maps</a></span>
+                    <span className="fw-semibold"><a href="#" onClick={handleGoogleMapClick} rel="noopener noreferrer">Xem trên Google Maps</a></span>
                   </div>
                 </div>
               </div>

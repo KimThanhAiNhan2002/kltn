@@ -32,11 +32,13 @@
   <link href="/assets_admin/plugins/datatables/dataTables.bootstrap5.min.css" rel="stylesheet">
   <link href="/assets_admin/dist/css/app.min.css" rel="stylesheet">
   <link href="/assets_admin/dist/css/style.css" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
  
 </head>
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <div id="mapcanvas"></div>
   <!--
     This HTML file is a template.
     If you open it directly in the browser, you will see an empty page.
@@ -80,6 +82,29 @@
     <script src="/assets_admin/dist/js/dashboard.js"></script>
     <script src="/assets_admin/dist/ckeditor/ckeditor.js"></script>
     <script src="https://kit.fontawesome.com/a557024320.js" crossorigin="anonymous"></script>
+    <!-- <script
+    src="https://maps.googleapis.com/maps/api/js?AIzaSyANES0dY-8HEQJEWJ7luJ6ywM0rdp-CzNc&callback=initMap"
+    async
+    defer
+  ></script>
+  <style>
+    #map {
+      height: 100%;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+  </script> -->
     <!-- <script>
         setTimeout(function () {
             toastr.options = {

@@ -107,7 +107,22 @@ const searchTouristSpotsByAddress = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+// Controller function để tìm kiếm địa điểm du lịch theo tọa độ
+const searchTouristSpotsByCoordinates = async (req, res) => {
+  const { lng, lat } = req.query;
+  try {
+    const results = await TouristSpot.find({
+      google_map: {
+        $geoWithin: {
+          $centerSphere: [[parseFloat(lng), parseFloat(lat)], 10 / 6378.1] // 10 km radius
+        }
+      }
+    });
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 export {
   getAllTouristSpots,
   getTouristSpotById,
@@ -115,5 +130,6 @@ export {
   updateTouristSpotById,
   deleteTouristSpotById,
   searchTouristSpots,
-  searchTouristSpotsByAddress
+  searchTouristSpotsByAddress,
+  searchTouristSpotsByCoordinates
 };

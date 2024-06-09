@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { FaMapMarkerAlt, FaHotel, FaUtensils } from 'react-icons/fa';
 import styles from './Map.module.css';
 
 const Map = () => {
@@ -74,7 +76,10 @@ const Map = () => {
 
       // Kiểm tra nếu longitude và latitude tồn tại và là số hợp lệ
       if (spotCoordinates && spotCoordinates.length === 2 && !isNaN(spotCoordinates[0]) && !isNaN(spotCoordinates[1])) {
-        const marker = new mapboxgl.Marker({ color: 'red' })
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.innerHTML = ReactDOMServer.renderToStaticMarkup(<FaMapMarkerAlt color="red" size={24} />);
+        const marker = new mapboxgl.Marker(el)
           .setLngLat(spotCoordinates)
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<div style="text-align:center;"><img src="${image}" alt="${spot.name}" style="width:50px;height:50px;"/><p>${spot.name}</p></div>`)) // Thêm popup với ảnh
           .addTo(map.current);
@@ -93,7 +98,10 @@ const Map = () => {
         }
 
         if (accommodationCoordinates && accommodationCoordinates.length === 2 && !isNaN(accommodationCoordinates[0]) && !isNaN(accommodationCoordinates[1])) {
-          const marker = new mapboxgl.Marker({ color: 'blue' })
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.innerHTML = ReactDOMServer.renderToStaticMarkup(<FaHotel color="blue" size={24} />);
+          const marker = new mapboxgl.Marker(el)
             .setLngLat(accommodationCoordinates)
             .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<div style="text-align:center;"><img src="${accommodation.image}" alt="${accommodation.name}" style="width:50px;height:50px;"/><p>${accommodation.name}</p></div>`)) // Thêm popup với ảnh
             .addTo(map.current);
@@ -113,7 +121,10 @@ const Map = () => {
         }
 
         if (restaurantCoordinates && restaurantCoordinates.length === 2 && !isNaN(restaurantCoordinates[0]) && !isNaN(restaurantCoordinates[1])) {
-          const marker = new mapboxgl.Marker({ color: 'green' })
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.innerHTML = ReactDOMServer.renderToStaticMarkup(<FaUtensils color="green" size={24} />);
+          const marker = new mapboxgl.Marker(el)
             .setLngLat(restaurantCoordinates)
             .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<div style="text-align:center;"><img src="${restaurant.image}" alt="${restaurant.name}" style="width:50px;height:50px;"/><p>${restaurant.name}</p></div>`)) // Thêm popup với ảnh
             .addTo(map.current);
@@ -128,7 +139,7 @@ const Map = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchTerm.trim()) {
-      setMessage('Hãy nhập địa điểm hoặc tọa độ bạn muốn tìm kiếm');
+      setMessage('Hãy nhập địa điểm hoặc địa chỉ bạn muốn tìm kiếm');
       return;
     }
 
@@ -138,17 +149,9 @@ const Map = () => {
       if (searchBy === 'name') {
         const response = await axios.get(`http://localhost:5000/api/touristSpots/search?query=${searchTerm}`);
         data = response.data;
-      } else if (searchBy === 'coordinates') {
-        const [lng, lat] = searchTerm.split(',').map(coord => parseFloat(coord.trim()));
-        if (isNaN(lng) || isNaN(lat)) {
-          setMessage('Tọa độ không hợp lệ. Vui lòng nhập lại.');
-          return;
-        }
-        const response = await axios.get(`http://localhost:5000/api/touristSpots/searchByCoordinates?lng=${lng}&lat=${lat}`);
+      } else if (searchBy === 'address') {
+        const response = await axios.get(`http://localhost:5000/api/touristSpots/searchByAddress?query=${searchTerm}`);
         data = response.data;
-        if (data.length > 0) {
-          map.current.flyTo({ center: [lng, lat], zoom: 14 });
-        }
       }
 
       if (data.length === 0) {
@@ -156,6 +159,11 @@ const Map = () => {
       } else {
         setMessage('');
         setSpots(data);
+        if (data.length > 0) {
+          const spot = data[0]; // Lấy tọa độ của địa điểm đầu tiên tìm thấy
+          const spotCoordinates = JSON.parse(spot.google_map);
+          map.current.flyTo({ center: spotCoordinates, zoom: 14 });
+        }
       }
     } catch (error) {
       console.error('Error searching tourist spots:', error);
@@ -165,45 +173,75 @@ const Map = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.searchBar}>
-        <form onSubmit={handleSearch} className="border-0 card d-flex flex-md-row position-relative search-wrapper">
-          <div className="align-items-center d-flex search-field w-100">
-            <div className="svg-icon">
-              <AiOutlineSearch size={24} />
+      <div className="align-items-end d-flex hero-header-map position-relative">
+        {/* start map */}
+        <div className="h-100 position-absolute start-0 top-0 w-100">
+          <div ref={mapContainer} id="mapcanvas" className="h-100 w-100"></div>
+        </div>
+        {/* end /. map */}
+        <div className="container position-relative z-1">
+          <div className="row justify-content-center">
+            <div className="col-lg-10">
+              {/* start search content */}
+              <div className="border-0 card d-flex flex-md-row position-relative search-wrapper mb-5 shadow">
+                <form onSubmit={handleSearch} className="d-flex w-100">
+                  <div className="align-items-center d-flex search-field w-100">
+                    <div className="svg-icon">
+                      <AiOutlineSearch size={24} />
+                    </div>
+                    <input
+                      style={{ width: '250px' }} className="form-control search-input"
+                      placeholder={`Tìm kiếm địa điểm theo ${searchBy === 'name' ? 'tên' : 'địa chỉ'}`}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                  <div className="vertical-divider"></div>
+                  <div className="align-items-center d-flex search-field w-100">
+                    <div className="svg-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-geo-alt" viewBox="0 0 16 16">
+                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                      </svg>
+                    </div>
+                    <select
+                      value={searchBy}
+                      onChange={(e) => setSearchBy(e.target.value)}
+                      style={{ width: '250px' }} className="form-select search-select-field"
+                    >
+                      <option value="name">Tìm kiếm theo tên địa điểm</option>
+                      <option value="address">Tìm kiếm theo địa chỉ</option>
+                    </select>
+                  </div>
+                  <input
+                    type="submit"
+                    value="Tìm kiếm"
+                    className="btn btn-primary rounded-5 mt-3 mt-md-0"
+                  />
+                </form>
+              </div>
+              {/* end /. search content */}
             </div>
-            <input
-              style={{ width: '250px' }} className="form-control search-input"
-              placeholder={`Tìm kiếm địa điểm theo ${searchBy === 'name' ? 'tên' : 'tọa độ'}`}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <div className="vertical-divider"></div>
-          <div className="align-items-center d-flex search-field w-100">
-            <div className="svg-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-geo-alt" viewBox="0 0 16 16">
-                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              </svg>
+            <div className="col-lg-2">
+              <div className="legend">
+                <div className="d-flex align-items-center mb-2">
+                  <FaMapMarkerAlt color="red" size={24} className="me-2" />
+                  <span>Địa điểm du lịch</span>
+                </div>
+                <div className="d-flex align-items-center mb-2">
+                  <FaHotel color="blue" size={24} className="me-2" />
+                  <span>Khách sạn</span>
+                </div>
+                <div className="d-flex align-items-center">
+                  <FaUtensils color="green" size={24} className="me-2" />
+                  <span>Nhà hàng</span>
+                </div>
+              </div>
             </div>
-            <select
-              value={searchBy}
-              onChange={(e) => setSearchBy(e.target.value)}
-              style={{ width: '250px' }} className="form-select search-select-field"
-            >
-              <option value="name">Tìm kiếm theo tên địa điểm</option>
-              <option value="coordinates">Tìm kiếm theo tọa độ</option>
-            </select>
           </div>
-          <input
-            type="submit"
-            value="Tìm kiếm"
-            className="btn btn-primary rounded-5 mt-3 mt-md-0"
-          />
-        </form>
+        </div>
       </div>
       {message && <p className={styles.message}>{message}</p>}
-      <div ref={mapContainer} id="mapcanvas" style={{ height: '500px' }}></div>
       {mouseLng && mouseLat && (
         <div style={{ position: 'absolute', bottom: '10px', left: '10px', backgroundColor: 'white', padding: '5px', borderRadius: '5px', boxShadow: '0 0 5px rgba(0,0,0,0.5)' }}>
           <strong>Longitude:</strong> {mouseLng}, <strong>Latitude:</strong> {mouseLat}

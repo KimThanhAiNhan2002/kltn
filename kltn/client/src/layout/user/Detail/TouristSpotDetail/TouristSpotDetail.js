@@ -308,7 +308,6 @@ const TouristSpotDetail = () => {
         </div>
       </div>
 
-      {/* Tương tự cho các mục khác như Nhà hàng, Đặc sản, Dịch vụ, Quà lưu niệm */}
       
       {showModal && (
         <div className={`${styles.modal} ${styles.modalActive}`}>

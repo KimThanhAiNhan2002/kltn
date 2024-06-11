@@ -1,3 +1,4 @@
+/* Home.module.css */
 .pageContainer {
   display: flex;
   flex-direction: column;
@@ -7,7 +8,7 @@
 .heroHeader {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   overflow: hidden;
 }
 
@@ -45,7 +46,7 @@
   margin: 0.5rem 0;
 }
 
-.form {
+.search-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,15 +57,17 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.9);
+  position: relative; /* Ensure the position is relative for absolute positioning of suggestions */
 }
 
-.input {
+.search-field {
   background: transparent;
   width: 300px;
   max-width: 400px;
   font-family: 'Poppins', sans-serif;
   border: none;
   outline: none;
+  position: relative; /* Ensure the position is relative for absolute positioning of suggestions */
 }
 
 .button {
@@ -147,3 +150,25 @@
   max-width: 100%;
   font-size: 0.9rem;
 }
+
+.suggestionsContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: white;
+  z-index: 1000;
+  border-radius: 0 0 0.5rem 0.5rem; /* Ensure the suggestions container has a border radius */
+  list-style-type: none; /* Remove dots from suggestions */
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestionItemHighlighted {
+  background-color: #ddd;
+}
+

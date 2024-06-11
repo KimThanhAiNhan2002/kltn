@@ -5,6 +5,7 @@ import styles from './Home.module.css';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from 'react-owl-carousel';
+import Autosuggest from 'react-autosuggest';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,13 +13,13 @@ const Home = () => {
   const [allSpots, setAllSpots] = useState([]);
   const [searchBy, setSearchBy] = useState('name');
   const [message, setMessage] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     const fetchAllSpots = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/touristSpots/tourist-spots');
         const data = await response.json();
-        console.log('Fetched data:', data); // Check the data from API
         setAllSpots(data);
       } catch (error) {
         console.error('Error fetching all tourist spots:', error);
@@ -29,11 +30,57 @@ const Home = () => {
     fetchAllSpots();
   }, []);
 
+  const getSuggestions = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    if (inputLength === 0) {
+      return [];
+    }
+
+    const filteredSpots = allSpots.filter(spot =>
+      (searchBy === 'name' ? spot.name : spot.address).toLowerCase().includes(inputValue)
+    );
+
+    // Remove duplicates based on name or address
+    const uniqueSpots = [];
+    const seenSpots = new Set();
+
+    filteredSpots.forEach(spot => {
+      const identifier = searchBy === 'name' ? spot.name.toLowerCase() : spot.address.toLowerCase();
+      if (!seenSpots.has(identifier)) {
+        seenSpots.add(identifier);
+        uniqueSpots.push(spot);
+      }
+    });
+
+    return uniqueSpots;
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const onSuggestionSelected = (event, { suggestion }) => {
+    setSearchTerm(suggestion[searchBy]);
+    // Don't set searchResults here to ensure all relevant results are displayed on search
+  };
+
+  const renderSuggestion = suggestion => (
+    <div>
+      {suggestion[searchBy]}
+    </div>
+  );
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchTerm.trim()) {
       setMessage('Hãy nhập địa điểm bạn muốn tìm kiếm');
-      setSearchResults([]); // Xóa kết quả tìm kiếm nếu không có gì để tìm kiếm
+      setSearchResults([]);
       return;
     }
     setMessage('');
@@ -61,16 +108,13 @@ const Home = () => {
   const renderRegionCard = (spot) => (
     <div className="region-card rounded-4 overflow-hidden position-relative text-white" key={spot._id}>
       <div className="region-card-image">
-        <img src={spot.image} alt={spot.name} style={{height:'340px'}} className=" object-fit-cover w-100" />
+        <img src={spot.image} alt={spot.name} style={{ height: '340px' }} className="object-fit-cover w-100" />
       </div>
       <div className="region-card-content d-flex flex-column h-100 position-absolute start-0 top-0 w-100">
         <div className="region-card-info">
-          {/* <h4 className="font-caveat mb-0">{spot.country}</h4>
-          <h3 className="h2">{spot.city}</h3>
-          <span>{spot.address} </span> */}
         </div>
         <Link to={`/touristSpots/${spot._id}`} className="align-items-center d-flex fw-semibold justify-content-between mt-auto region-card-link">
-          <div style={{width:'72%'}} className="fs-12 region-card-link-text text-uppercase text-white">{spot.name} </div>
+          <div style={{ width: '72%' }} className="fs-12 region-card-link-text text-uppercase text-white">{spot.name}</div>
           <div className="align-items-center bg-blur text-white btn-icon-md d-flex end-0 justify-content-center rounded-circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-right" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"></path>
@@ -87,8 +131,6 @@ const Home = () => {
         <video className={styles.video} src='assets/beachVid.mp4' autoPlay loop muted />
         <div className={styles.overlay}></div>
         <div className={styles.content}>
-          <h1>First Class Travel</h1>
-          <h2 className='py-4'>Top 1% Locations Worldwide</h2>
           <form onSubmit={handleSearch} className="border-0 card d-flex flex-md-row position-relative search-wrapper">
             <div className="align-items-center d-flex search-field w-100">
               <div className="svg-icon">
@@ -96,12 +138,27 @@ const Home = () => {
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
               </div>
-              <input
-                style={{ width: '250px' }} className="form-control search-input"
-                placeholder={`Tìm kiếm địa điểm theo ${searchBy === 'name' ? 'tên' : 'địa chỉ'}`}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              <div style={{ position: 'relative', width: '300px' }}>
+                <Autosuggest
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={onSuggestionsClearRequested}
+                  onSuggestionSelected={onSuggestionSelected}
+                  getSuggestionValue={suggestion => suggestion[searchBy]}
+                  renderSuggestion={renderSuggestion}
+                  inputProps={{
+                    placeholder: `Tìm kiếm địa điểm theo ${searchBy === 'name' ? 'tên' : 'địa chỉ'}`,
+                    value: searchTerm,
+                    onChange: (e, { newValue }) => setSearchTerm(newValue),
+                  }}
+                  theme={{
+                    input: 'form-control search-input',
+                    suggestionsContainer: styles.suggestionsContainer,
+                    suggestion: styles.suggestionItem,
+                    suggestionHighlighted: styles.suggestionItemHighlighted
+                  }}
+                />
+              </div>
             </div>
             <div className="vertical-divider"></div>
             <div className="align-items-center d-flex search-field w-100">
@@ -157,16 +214,16 @@ const Home = () => {
             </div>
           </div>
           {allSpots.length > 0 ? (
-            <OwlCarousel className="owl-carousel owl-theme place-carousel owl-nav-center" items={5} margin={20} nav>
-              {allSpots.map((spot) => renderRegionCard(spot))}
-            </OwlCarousel>
+            <div style={{ height: '450px' }}> {/* Increase the height to give more space */}
+              <OwlCarousel className="owl-carousel owl-theme place-carousel owl-nav-center" items={5} margin={20} nav>
+                {allSpots.map((spot) => renderRegionCard(spot))}
+              </OwlCarousel>
+            </div>
           ) : (
             <p>Không có địa điểm nào để hiển thị.</p>
           )}
-
         </div>
       </div>
-
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <nav  class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav  class="navbar navbar-expand-lg navbar-light sticky-top ">
   <div class="container">
     <a class="navbar-brand m-0" href="/">
       <img class="logo-white" src="assets/images/logo-white.png" alt=""/>

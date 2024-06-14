@@ -123,6 +123,25 @@ const searchTouristSpotsByCoordinates = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+// Controller function để lọc địa điểm du lịch theo danh mục
+const getTouristSpotsByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const results = await TouristSpot.find({ category: { $regex: category, $options: 'i' } });
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+// Controller function để lấy tất cả danh mục
+const getCategories = async (req, res) => {
+  try {
+    const categories = await TouristSpot.distinct('category');
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 export {
   getAllTouristSpots,
   getTouristSpotById,
@@ -131,5 +150,7 @@ export {
   deleteTouristSpotById,
   searchTouristSpots,
   searchTouristSpotsByAddress,
-  searchTouristSpotsByCoordinates
+  searchTouristSpotsByCoordinates,
+  getTouristSpotsByCategory,
+  getCategories
 };

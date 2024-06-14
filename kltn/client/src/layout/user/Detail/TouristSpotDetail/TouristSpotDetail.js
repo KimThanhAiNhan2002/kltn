@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import styles from './TouristSpotDetail.module.css';
+// import FacebookComments from '../FacebookComments';
+import DisqusComments from '../DisqusComments';
 
 const TouristSpotDetail = () => {
   const { id } = useParams();
@@ -31,30 +33,6 @@ const TouristSpotDetail = () => {
     setShowModal(false);
     setModalContent('');
   };
-
-  const checkOverflow = (element) => {
-    return element.scrollHeight > element.clientHeight;
-  };
-
-  // const Description = ({ content }) => {
-  //   const [showMore, setShowMore] = useState(false);
-  //   const contentRef = useRef(null);
-
-  //   useEffect(() => {
-  //     if (contentRef.current && checkOverflow(contentRef.current)) {
-  //       setShowMore(true);
-  //     }
-  //   }, [content, contentRef]);
-
-  //   return (
-  //     <div>
-  //       <p className={styles.description}>
-  //         Mô tả: <span className={styles.ellipsis} ref={contentRef} dangerouslySetInnerHTML={{ __html: content }}></span>
-  //       </p>
-  //       {showMore && <button className={styles.moreBtn} onClick={() => openModal(content)}>Xem thêm</button>}
-  //     </div>
-  //   );
-  // };
 
   if (!spot) {
     return <div>Loading...</div>;
@@ -102,8 +80,9 @@ const TouristSpotDetail = () => {
                 <h4 className="fw-semibold fs-2">Mô tả</h4>
               </div>
               <div className="align-items-sm-center rounded-3">
-                <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content "></div>
+                <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div>
               </div>
+              <DisqusComments url={`http://localhost:3000/touristSpots/${spot._id}`} identifier={spot._id} />
             </div>
           </div>
         </div>
@@ -126,26 +105,24 @@ const TouristSpotDetail = () => {
                       </Link>
                       <div className="d-flex flex-column h-100 position-relative p-3">
                         <h4 className={`${styles.title} fs-18 fw-semibold mb-0`}>{accommodation.name}</h4>
-                        {/* <Description content={accommodation.description} /> */}
                         <div className="d-flex flex-wrap gap-3 mt-2 z-1">
-                        <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" className="bi bi-telephone" viewBox="0 0 16 16">
-                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                          </svg>
-                          <span>Số điện thoại: {accommodation.phone_number}</span>
-                        </a>
-                        <a href="#" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
-                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                          </svg>
-                          <span>Địa chỉ: {accommodation.address}</span>
-                        </a>
+                          <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" className="bi bi-telephone" viewBox="0 0 16 16">
+                              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                            <span>Số điện thoại: {accommodation.phone_number}</span>
+                          </a>
+                          <a href="#" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
+                              <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                              <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                            </svg>
+                            <span>Địa chỉ: {accommodation.address}</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
                 ))
               ) : (
                 <p>Khách sạn của địa điểm đang cập nhật</p>
@@ -172,26 +149,24 @@ const TouristSpotDetail = () => {
                       </Link>
                       <div className="d-flex flex-column h-100 position-relative p-3">
                         <h4 className={`${styles.title} fs-18 fw-semibold mb-0`}>{restaurant.name}</h4>
-                        {/* <Description content={restaurant.description} /> */}
                         <div className="d-flex flex-wrap gap-3 mt-2 z-1">
-                        <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" className="bi bi-telephone" viewBox="0 0 16 16">
-                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                          </svg>
-                          <span>Số điện thoại: {restaurant.phone_number}</span>
-                        </a>
-                        <a href="#" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
-                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                          </svg>
-                          <span>Địa chỉ: {restaurant.address}</span>
-                        </a>
+                          <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#9b9b9b" className="bi bi-telephone" viewBox="0 0 16 16">
+                              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                            <span>Số điện thoại: {restaurant.phone_number}</span>
+                          </a>
+                          <a href="#" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
+                              <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                              <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                            </svg>
+                            <span>Địa chỉ: {restaurant.address}</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
                 ))
               ) : (
                 <p>Nhà hàng của địa điểm đang cập nhật</p>
@@ -205,8 +180,6 @@ const TouristSpotDetail = () => {
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
             <h4 className="fw-semibold fs-2">Đặc sản</h4>
-            <p className="mb-0 fs-15">There are many variations of passages of Lorem Ipsum<br className="d-none d-lg-block" /> available, but the majority have</p>
-
             <div className="row g-4">
               {spot.specialties.length > 0 ? (
                 spot.specialties.map((specialtie, index) => (
@@ -220,27 +193,18 @@ const TouristSpotDetail = () => {
                       </Link>
                       <div className="d-flex flex-column h-100 position-relative p-3">
                         <h4 className={`${styles.title} fs-18 fw-semibold mb-0`}>{specialtie.name}</h4>
-                        {/* <Description content={specialtie.description} /> */}
                         <div className="d-flex flex-wrap gap-3 mt-2 z-1">
-                        <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
-                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                          </svg>
-                          <span>Xuất xứ: {specialtie.origin}</span>
-                        </a>
-                        {/* <a href="#" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
-                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                          </svg>
-                          <span>{specialtie.expired}</span>
-                        </a> */}
+                          <a href="tel:+4733378901" className="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b" className="bi bi-compass" viewBox="0 0 16 16">
+                              <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                              <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                            </svg>
+                            <span>Xuất xứ: {specialtie.origin}</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
                 ))
               ) : (
                 <p>Đặc sản của địa điểm đang cập nhật</p>
@@ -266,7 +230,6 @@ const TouristSpotDetail = () => {
                       </Link>
                       <div className="d-flex flex-column h-100 position-relative p-3">
                         <h4 className="fs-18 fw-semibold mb-0">{service.name}</h4>
-                        {/* <Description content={service.description} /> */}
                       </div>
                     </div>
                   </div>
@@ -296,7 +259,6 @@ const TouristSpotDetail = () => {
                       </Link>
                       <div className="d-flex flex-column h-100 position-relative p-3">
                         <h4 className="fs-18 fw-semibold mb-0">{souvenir.name}</h4>
-                        {/* <Description content={souvenir.description} /> */}
                       </div>
                     </div>
                   </div>
@@ -309,7 +271,6 @@ const TouristSpotDetail = () => {
         </div>
       </div>
 
-      
       {showModal && (
         <div className={`${styles.modal} ${styles.modalActive}`}>
           <div className={styles.modalContent}>

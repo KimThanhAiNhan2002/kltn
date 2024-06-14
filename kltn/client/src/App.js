@@ -20,6 +20,8 @@ import SouvenirDetail from './layout/user/Detail/SouvenirDetail/SouvenirDetail';
 import Login from './login/login';
 import AuthProvider from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
+import Introduce from './layout/user/Introduce/Introduce';
+import Category from './layout/user/Category/Category';
 
 const App = () => {
   const isNotAdminPage = window.location.pathname !== '/admin' && !window.location.pathname.startsWith('/admin/');
@@ -31,6 +33,8 @@ const App = () => {
         {isNotAdminPage && isNotLoginPage && <Header />}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Introduce/>}/>
+          <Route path="/category/:category" element={<Category/>} />
           <Route path="/home-map" element={<Map />} />
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoute />}>

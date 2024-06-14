@@ -7,16 +7,19 @@ import {
   deleteTouristSpotById,
   searchTouristSpots,
   searchTouristSpotsByAddress,
-  searchTouristSpotsByCoordinates // Thêm dòng này
+  searchTouristSpotsByCoordinates,
+  getTouristSpotsByCategory,
+  getCategories// Thêm dòng này
 } from '../controllers/touristSpotController';
 
 const router = express.Router();
-
+// Route để lấy tất cả danh mục
+router.get('/categories', getCategories);
 // Route để tìm kiếm địa điểm du lịch theo tên
 router.get('/search', searchTouristSpots);
-
+router.get('/tourist-spots/category/:category', getTouristSpotsByCategory);
 // Route để tìm kiếm địa điểm du lịch theo địa chỉ
-router.get('/searchByAddress', searchTouristSpotsByAddress); // Thêm dòng này
+router.get('/searchByAddress', searchTouristSpotsByAddress); 
 // Route để tìm kiếm địa điểm du lịch theo tọa độ
 router.get('/searchByCoordinates', searchTouristSpotsByCoordinates);
 // Các route khác...

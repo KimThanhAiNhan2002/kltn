@@ -1,0 +1,5 @@
+.carousel-image {
+    height: 400px; /* Bạn có thể thay đổi chiều cao theo ý muốn */
+    object-fit: cover;
+  }
+  

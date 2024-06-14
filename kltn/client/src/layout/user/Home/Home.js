@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './Home.module.css';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -8,6 +8,7 @@ import OwlCarousel from 'react-owl-carousel';
 import Autosuggest from 'react-autosuggest';
 
 const Home = () => {
+  const { category } = useParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [allSpots, setAllSpots] = useState([]);
@@ -30,6 +31,23 @@ const Home = () => {
     fetchAllSpots();
   }, []);
 
+  useEffect(() => {
+    const fetchSpotsByCategory = async () => {
+      if (category) {
+        try {
+          const response = await fetch(`http://localhost:5000/api/touristSpots/category/${category}`);
+          const data = await response.json();
+          setSearchResults(data);
+        } catch (error) {
+          console.error('Error fetching spots by category:', error);
+          setMessage('Đã xảy ra lỗi khi lấy dữ liệu, vui lòng thử lại sau');
+        }
+      }
+    };
+
+    fetchSpotsByCategory();
+  }, [category]);
+
   const getSuggestions = (value) => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -42,7 +60,6 @@ const Home = () => {
       (searchBy === 'name' ? spot.name : spot.address).toLowerCase().includes(inputValue)
     );
 
-    // Remove duplicates based on name or address
     const uniqueSpots = [];
     const seenSpots = new Set();
 
@@ -67,7 +84,6 @@ const Home = () => {
 
   const onSuggestionSelected = (event, { suggestion }) => {
     setSearchTerm(suggestion[searchBy]);
-    // Don't set searchResults here to ensure all relevant results are displayed on search
   };
 
   const renderSuggestion = suggestion => (
@@ -206,15 +222,13 @@ const Home = () => {
             <div className="row justify-content-center">
               <div className="col-sm-10 col-md-10 col-lg-8 col-xl-7">
                 <div className="section-header text-center mb-5" data-aos="fade-down">
-                  <div className="d-inline-block font-caveat fs-1 fw-medium section-header__subtitle text-capitalize">Top Regions</div>
-                  <h2 className="display-5 fw-semibold mb-3 section-header__title text-capitalize">Explore Cities</h2>
-                  <div className="sub-title fs-16">Discover exciting categories. <span className="fw-semibold">Find what you’re looking for.</span></div>
+                  <h2 className="display-5 fw-semibold mb-3 section-header__title text-capitalize">Tất cả địa điểm du lịch</h2>
                 </div>
               </div>
             </div>
           </div>
           {allSpots.length > 0 ? (
-            <div style={{ height: '450px' }}> {/* Increase the height to give more space */}
+            <div style={{ height: '450px' }}> 
               <OwlCarousel className="owl-carousel owl-theme place-carousel owl-nav-center" items={5} margin={20} nav>
                 {allSpots.map((spot) => renderRegionCard(spot))}
               </OwlCarousel>

@@ -126,10 +126,10 @@ const AddTouristSpot = ({ setCurrentView }) => {
                   <div className="">
                     <label className="required fw-medium mb-2">Danh Mục</label>
                     <select className="form-select" name="category" onChange={handleChange}>
-                      <option value="Category">Category</option>
-                      <option value="Restaurant">Restaurant</option>
-                      <option value="Event">Event</option>
-                      <option value="Adrenaline">Adrenaline</option>
+                      <option value="Du lịch văn hóa">Du lịch văn hóa</option>
+                      <option value="Du lịch tôn giáo">Du lịch tôn giáo</option>
+                      <option value="Du lịch sinh thái">Du lịch sinh thái</option>
+                      <option value="Làng nghề">Làng nghề</option>
                     </select>
                   </div>
                 </div>

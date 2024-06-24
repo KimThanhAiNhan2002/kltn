@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
+//import { AiOutlineSearch } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import styles from './Home.module.css';
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -198,7 +198,7 @@ const Home = () => {
               value="Tìm kiếm"
               className="btn btn-primary rounded-5 mt-3 mt-md-0"
             />
-            <AiOutlineSearch />
+            
           </form>
         </div>
       </div>

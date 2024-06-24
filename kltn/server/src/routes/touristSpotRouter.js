@@ -9,7 +9,7 @@ import {
   searchTouristSpotsByAddress,
   searchTouristSpotsByCoordinates,
   getTouristSpotsByCategory,
-  getCategories// Thêm dòng này
+  getCategories
 } from '../controllers/touristSpotController';
 
 const router = express.Router();

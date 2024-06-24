@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
 
@@ -25,44 +26,36 @@ const Login = () => {
       setIsAuthenticated(true);
       navigate('/admin');
     } else {
-      alert('Login failed');
+      alert('Đăng nhập thất bại');
     }
   };
 
   return (
-<div style={{background:'white'}} class="p-3 p-sm-5 justify-content-center">
-    <div class="row g-4 g-xl-5 justify-content-center">
-        <div class="col-xl-5 d-flex justify-content-center">
-            <div class="authentication-wrap overflow-hidden position-relative text-center text-sm-start my-5">
-              
-                <div class="mb-5">
-                    <h2 class="display-6 fw-semibold mb-3">Welcome back! Please <span class="font-caveat text-primary">Sign in</span> to continue.</h2>
-                    <p class="mb-0">Unlock a world of exclusive content, enjoy special offers, and be the first to dive into exciting news and updates by joining our community!</p>
-                </div>            
-                <form onSubmit={handleLogin} class="register-form">
-                  
-                    <div class="form-group mb-4">
-                        <label class="required">Tên Tài Khoản</label>
-                        <input style={{background:'white'}} type="text"  value={username} onChange={(e) => setUsername(e.target.value)} class="form-control "/>
-                        <div class="invalid-feedback text-start">Enter your valid email</div>
-                    </div>
-                   
-                    <div class="form-group mb-4">
-                        <label class="required">Mật Khẩu</label>
-                        <input style={{background:'white'}} id="password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" class="form-control password" autocomplete="off"/>
-                        <i data-bs-toggle="#password" class="fa-regular fa-eye-slash toggle-password"></i>
-                    </div>
-                   
-                   
-                    <button type="submit" class="btn btn-primary btn-lg w-100">Đăng Nhập</button>
-                  
-                </form>
-               
+    <div style={{ background: 'white' }} className="p-3 p-sm-5 justify-content-center">
+      <div className="row g-4 g-xl-5 justify-content-center">
+        <div className="col-xl-5 d-flex justify-content-center">
+          <div className="authentication-wrap overflow-hidden position-relative text-center text-sm-start my-5">
+            <div className="mb-5">
+              <h2 className="display-6 fw-semibold mb-3"> Vui lòng <span className="font-caveat text-primary">Đăng nhập</span> để vào bảng điều khiển.</h2>
+              <p className="mb-0">Truy cập vào bảng điều khiển quản trị để quản lý nội dung địa điểm du lịch và các dịch vụ liên quan.</p>
             </div>
+            <form onSubmit={handleLogin} className="register-form">
+              <div className="form-group mb-4">
+                <label className="required">Tên Tài Khoản</label>
+                <input style={{ background: 'white' }} type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control " />
+                <div className="invalid-feedback text-start">Nhập tên tài khoản hợp lệ</div>
+              </div>
+              <div className="form-group mb-4 position-relative">
+                <label className="required">Mật Khẩu</label>
+                <input style={{ background: 'white' }} id="password" value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "text" : "password"} className="form-control password" autoComplete="off" />
+                <i onClick={() => setShowPassword(!showPassword)} className={`fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'} toggle-password`} style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}></i>
+              </div>
+              <button type="submit" className="btn btn-primary btn-lg w-100">Đăng Nhập</button>
+            </form>
+          </div>
         </div>
-       
+      </div>
     </div>
-</div>
   );
 };
 

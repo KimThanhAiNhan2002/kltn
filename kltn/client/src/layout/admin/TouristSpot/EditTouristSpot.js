@@ -151,7 +151,7 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="">
-                    <label className="required fw-medium mb-2">Description</label>
+                    <label className="required fw-medium mb-2">Mô Tả</label>
                     <CKEditor
                       editor={ClassicEditor}
                       data={CKEditorContent}
@@ -181,8 +181,8 @@ const EditTouristSpot = ({ setCurrentView, editId }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="">
-                    <label className="required fw-medium mb-2">Google Map</label>
-                    <input type="text" className="form-control" name="google_map" value={formData.google_map} placeholder="Google Map" onChange={handleChange} required />
+                    <label className="required fw-medium mb-2">Tọa Độ</label>
+                    <input type="text" className="form-control" name="google_map" value={formData.google_map} placeholder="Tọa Độ" onChange={handleChange} required />
                   </div>
                 </div>
                 <div className="text-center">

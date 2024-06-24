@@ -50,7 +50,7 @@ const TouristSpotDetail = () => {
           <div className="col-lg-4 sidebar">
             <img src={spot.image} style={{ borderTopRightRadius: '1em', borderTopLeftRadius: '1em' }} className="bg-cover border-0 bg-no-repeat js-bg-image overflow-hidden profile-card_bg--img start-0 top-0 w-100" />
 
-            <div style={{ borderBottomRightRadius: '1em', borderBottomLeftRadius: '1em' }} className="border-0 p-4 position-relative profile-card shadow-sm text-center">
+            <div style={{ borderBottomRightRadius: '1em', borderBottomLeftRadius: '1em', background:'white' }} className="border-0 p-4 position-relative profile-card shadow-sm text-center">
               <h3 className="profile-card__name">{spot.name}</h3>
               <div className="mb-5">
                 <div className="border-bottom border-top py-3 fs-15">
@@ -65,12 +65,12 @@ const TouristSpotDetail = () => {
                     <span style={{ width: '67%' }} className="fw-semibold">{spot.category}</span>
                   </div>
                 </div>
-                <div className="border-bottom py-3 fs-15">
+                {/* <div className="border-bottom py-3 fs-15">
                   <div className="align-items-center d-flex justify-content-between mb-2">
                     <span className="text-muted">Google Map: </span>
                     <span className="fw-semibold"><a href="#" onClick={handleGoogleMapClick} rel="noopener noreferrer">Xem trên Google Maps</a></span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

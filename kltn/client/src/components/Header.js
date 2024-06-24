@@ -21,9 +21,8 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
-        <a className="navbar-brand m-0" href="/">
-          <img className="logo-white" src="assets/images/logo-white.png" alt=""/>
-          <img className="logo-dark" src="assets/images/logo.png" alt=""/>
+        <a className="navbar-brand m-0 col-lg-2" href="/">
+          <img className="logo-dark" src="/assets/images/logotravel.png" alt="Travel Logo" style={{ width: '100%', height: '100%' }} />
         </a>
         
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +49,6 @@ const Header = () => {
                   <li key={category}><Link className="dropdown-item" to={`/category/${category}`}>{category}</Link></li>
                 ))}
               </ul>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="listings-map-grid-1.html">Explore</a>
             </li>
           </ul>
           

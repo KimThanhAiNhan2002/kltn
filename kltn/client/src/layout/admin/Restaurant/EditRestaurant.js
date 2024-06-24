@@ -177,8 +177,8 @@ const EditRestaurant = ({ setCurrentView, editId, touristSpotId }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="">
-                    <label className="required fw-medium mb-2">Google Map</label>
-                    <input type="text" className="form-control" name="google_map" value={restaurant.google_map} placeholder="Google Map" onChange={handleChange} required />
+                    <label className="required fw-medium mb-2">Tọa Độ</label>
+                    <input type="text" className="form-control" name="google_map" value={restaurant.google_map} placeholder="Tọa Độ" onChange={handleChange} required />
                   </div>
                 </div>
                 <div className="text-center">

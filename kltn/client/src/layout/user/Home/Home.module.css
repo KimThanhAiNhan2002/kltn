@@ -12,6 +12,7 @@
   overflow: hidden;
 }
 
+
 .video {
   width: 100%;
   height: 100%;
@@ -160,12 +161,13 @@
   background-color: white;
   z-index: 1000;
   border-radius: 0 0 0.5rem 0.5rem; /* Ensure the suggestions container has a border radius */
-  list-style-type: none; /* Remove dots from suggestions */
 }
 
 .suggestionItem {
+ text-align: start;
   padding: 10px;
   cursor: pointer;
+  list-style: none;
 }
 
 .suggestionItemHighlighted {

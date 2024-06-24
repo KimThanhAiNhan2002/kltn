@@ -132,7 +132,7 @@ const RestaurantList = ({ setCurrentView, setEditId, setTouristSpotId }) => {
                       <h4 className="fs-18 fw-semibold mb-0">
                         <span>{restaurant.name}</span>
                       </h4>
-                      <p className="mt-1 fs-14 text-muted description">{restaurant.description}</p>
+                      <p className="mt-1 fs-14 text-muted description" dangerouslySetInnerHTML={{ __html: restaurant.description }}></p>
 
                       <div className="d-flex flex-column gap-3 gap-lg-2 gap-xl-3 mt-auto z-1">
                         <a className="d-flex gap-2 align-items-center fs-13 fw-semibold">

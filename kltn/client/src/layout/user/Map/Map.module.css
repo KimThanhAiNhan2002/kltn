@@ -9,3 +9,9 @@
   width: 30px;
   height: 30px;
 }
+
+.mapContainer {
+  width: 100%;
+  height: 80vh; 
+}
+

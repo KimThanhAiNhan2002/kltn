@@ -23,10 +23,47 @@ const AddTouristSpot = ({ setCurrentView }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+
+    // Handle coordinate input
+    if (name === 'google_map') {
+      const coordinates = value.split(',').map(coord => parseFloat(coord.trim()));
+
+      if (coordinates.length === 2) {
+        const [first, second] = coordinates;
+
+        // Check if the coordinates are in the wrong order
+        if (Math.abs(first) <= 90 && Math.abs(second) <= 180) {
+          // Correct order (latitude, longitude)
+          setFormData({
+            ...formData,
+            [name]: JSON.stringify([second, first])
+          });
+        } else if (Math.abs(second) <= 90 && Math.abs(first) <= 180) {
+          // Incorrect order, swap them
+          setFormData({
+            ...formData,
+            [name]: JSON.stringify([first, second])
+          });
+        } else {
+          // Invalid coordinates, do not set
+          setFormData({
+            ...formData,
+            [name]: value
+          });
+        }
+      } else {
+        // Invalid format, do not set
+        setFormData({
+          ...formData,
+          [name]: value
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleImageChange = (e) => {
@@ -126,6 +163,7 @@ const AddTouristSpot = ({ setCurrentView }) => {
                   <div className="">
                     <label className="required fw-medium mb-2">Danh Mục</label>
                     <select className="form-select" name="category" onChange={handleChange}>
+                      <option value="Chọn danh mục">Chọn danh mục</option>
                       <option value="Du lịch văn hóa">Du lịch văn hóa</option>
                       <option value="Du lịch tôn giáo">Du lịch tôn giáo</option>
                       <option value="Du lịch sinh thái">Du lịch sinh thái</option>
@@ -165,8 +203,8 @@ const AddTouristSpot = ({ setCurrentView }) => {
                 </div>
                 <div className="col-sm-12">
                   <div className="">
-                    <label className="required fw-medium mb-2">Google Map</label>
-                    <input type="text" className="form-control" name="google_map" placeholder="Google Map" onChange={handleChange} required />
+                    <label className="required fw-medium mb-2">Tọa Độ</label>
+                    <input type="text" className="form-control" name="google_map" placeholder="Tọa Độ (kinh độ, vĩ độ)" onChange={handleChange} required />
                   </div>
                 </div>
                 <div className="text-center">

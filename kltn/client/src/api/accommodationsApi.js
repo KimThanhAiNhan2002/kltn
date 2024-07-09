@@ -1,7 +1,7 @@
 //accommodationsApi.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/touristSpots'; // Đảm bảo URL này đúng với URL của server
+const API_URL = 'http://103.179.188.20:5000/api/touristSpots'; // Đảm bảo URL này đúng với URL của server
 
 export const getAccommodations = async (touristSpotId) => {
   try {

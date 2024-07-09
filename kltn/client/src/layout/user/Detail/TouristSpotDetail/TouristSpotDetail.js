@@ -14,7 +14,7 @@ const TouristSpotDetail = () => {
   useEffect(() => {
     const fetchSpot = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/${id}`);
+        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/${id}`);
         const data = await response.json();
         setSpot(data);
       } catch (error) {
@@ -82,7 +82,7 @@ const TouristSpotDetail = () => {
               <div className="align-items-sm-center rounded-3">
                 <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div>
               </div>
-              <DisqusComments url={`http://localhost:3000/touristSpots/${spot._id}`} identifier={spot._id} />
+              <DisqusComments url={`http://103.179.188.20:3000/touristSpots/${spot._id}`} identifier={spot._id} />
             </div>
           </div>
         </div>

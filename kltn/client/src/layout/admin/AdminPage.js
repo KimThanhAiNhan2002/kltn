@@ -231,8 +231,8 @@ const AdminPage = () => {
             {currentView === 'outlet' ? <Outlet /> : renderView()}
             <footer className="footer-content">
               <div className="align-items-center d-flex footer-text gap-3 justify-content-between">
-                <div className="copy">© 2022 Admin - All Rights Reserved</div>
-                <div className="credit">Developed by: <a href="/">Admin</a> 🌺💚</div>
+                <div className="copy"> Admin - Du lịch Tây Nam Bộ </div>
+                <div className="credit"> <a href="/">Admin</a> 🌺💚</div>
               </div>
             </footer>
             <div className="overlay"></div>

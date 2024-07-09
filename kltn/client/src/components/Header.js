@@ -18,11 +18,16 @@ const Header = () => {
     fetchCategories();
   }, []);
 
+  const linkStyle = {
+    fontWeight: 'bold',
+    color: '' 
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
         <a className="navbar-brand m-0 col-lg-2" href="/">
-          <img className="logo-dark" src="/assets/images/logotravel.png" alt="Travel Logo" style={{ width: '100%', height: '100%' }} />
+          <img className="logo-dark" src="/assets/images/travellogo.png" alt="Travel Logo" style={{ width: '100%', height: '100%' }} />
         </a>
         
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,21 +37,23 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="/home">Giới thiệu</a>
+              <a className="nav-link" href="/home" style={linkStyle}>Giới thiệu</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">Trang chủ</a>
+              <a className="nav-link" href="/" style={linkStyle}>Trang chủ</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/home-map">Bản đồ</a>
+              <a className="nav-link" href="/home-map" style={linkStyle}>Bản đồ</a>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={linkStyle}>
                 Danh mục
               </a>
               <ul className="dropdown-menu">
                 {categories.map((category) => (
-                  <li key={category}><Link className="dropdown-item" to={`/category/${category}`}>{category}</Link></li>
+                  <li key={category}>
+                    <Link className="dropdown-item" to={`/category/${category}`} style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>{category}</Link>
+                  </li>
                 ))}
               </ul>
             </li>

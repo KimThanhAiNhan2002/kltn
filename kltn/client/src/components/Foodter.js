@@ -8,10 +8,8 @@ const Footer = () => {
 
     const linkStyle = {
         color: 'white',
-    };
-
-    const linkHoverStyle = {
-        color: 'lightgray',
+        textDecoration: 'none',
+        margin: '0 10px',
     };
 
     return (
@@ -20,10 +18,16 @@ const Footer = () => {
                 <div className="align-items-center g-3 py-4 row">
                     <div className="col-lg-auto">
                         {/* start footer nav */}
-                        <ul className="list-unstyled list-separator mb-2 footer-nav">
-                            <li className="list-inline-item"><a href="/" style={linkStyle}>Privacy</a></li>
-                            <li className="list-inline-item"><a href="/" style={linkStyle}>Sitemap</a></li>
-                            <li className="list-inline-item"><a href="/" style={linkStyle}>Cookies</a></li>
+                        <ul className="list-unstyled list-separator mb-2 footer-nav d-flex">
+                            <li className="list-inline-item">
+                                <a href="/privacy" style={linkStyle}>Chính Sách Bảo Mật</a>
+                            </li>
+                            <li className="list-inline-item">
+                                <a href="/sitemap" style={linkStyle}>Sơ Đồ Trang Web</a>
+                            </li>
+                            <li className="list-inline-item">
+                                <a href="/cookies" style={linkStyle}>Chính Sách Cookie</a>
+                            </li>
                         </ul>
                         {/* end /. footer nav */}
                     </div>
@@ -31,11 +35,11 @@ const Footer = () => {
                         <div className="align-items-center row">
                             {/* start footer logo */}
                             <a href="index.html" className="col-sm-auto footer-logo mb-2 mb-sm-0">
-                                <img src="/assets/images/travelRemove.png" alt="/" />
+                                <img src="/assets/images/travellogo2.png" alt="Logo" style={{ maxWidth: '100px' }} />
                             </a>
                             {/* end /. footer logo */}
                             {/* start text */}
-                            <div className="col-sm-auto copy">© 2022 ListOn - All Rights Reserved</div>
+                            <div className="col-sm-auto copy"> Du Lịch Tây Nam Bộ</div>
                             {/* end /. text */}
                         </div>
                     </div>

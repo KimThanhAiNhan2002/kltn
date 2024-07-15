@@ -30,7 +30,7 @@ const SpecialtyDetail = () => {
           <img src={specialty.image} style={{ borderTopRightRadius: '1em', borderTopLeftRadius: '1em' }} className="bg-cover border-0 bg-no-repeat js-bg-image overflow-hidden profile-card_bg--img start-0 top-0 w-100" />
 
           <div style={{ borderBottomRightRadius: '1em', borderBottomLeftRadius: '1em' }} className="border-0 p-4 position-relative profile-card shadow-sm text-center">
-            <h3 className="profile-card__name">{specialty.name}</h3>
+            <h3 className="profile-card__name"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>{specialty.name}</h3>
             <div className="mb-5">
               <div className="border-bottom border-top py-3 fs-15">
                 <div className="align-items-center d-flex justify-content-between">
@@ -50,7 +50,8 @@ const SpecialtyDetail = () => {
         <div className="col-lg-8 ps-xxl-5">
           <div className="border-0 card listing-form p-4 rounded-4 shadow-sm">
             <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-              <h4 className="fw-semibold fs-2">Mô tả</h4>
+              <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)', textAlign: 'center' }}
+              >Mô tả</h4>
             </div>
             <div className="align-items-sm-center rounded-3">
               <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: specialty.description }} className="News__Detail__Content "></div>

@@ -77,7 +77,8 @@ const TouristSpotDetail = () => {
           <div className="col-lg-8 ps-xxl-5">
             <div className="border-0 card listing-form p-4 rounded-4 shadow-sm">
               <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-                <h4 className="fw-semibold fs-2">  Mô tả</h4>
+                <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)', textAlign: 'center' }}
+                >  Mô tả</h4>
               </div>
               <div className="align-items-sm-center rounded-3">
                 <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div>
@@ -91,7 +92,7 @@ const TouristSpotDetail = () => {
       <div className="container py-4">
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-            <h4 className="fw-semibold fs-2">Khách sạn</h4>
+            <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>Khách sạn</h4>
             <div className="row g-4">
               {spot.accommodations.length > 0 ? (
                 spot.accommodations.map((accommodation, index) => (
@@ -135,7 +136,7 @@ const TouristSpotDetail = () => {
       <div className="container py-4">
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-            <h4 className="fw-semibold fs-2">Nhà hàng</h4>
+            <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>Nhà hàng</h4>
             <div className="row g-4">
               {spot.restaurants.length > 0 ? (
                 spot.restaurants.map((restaurant, index) => (
@@ -179,7 +180,7 @@ const TouristSpotDetail = () => {
       <div className="container py-4">
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-            <h4 className="fw-semibold fs-2">Đặc sản</h4>
+            <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>Đặc sản</h4>
             <div className="row g-4">
               {spot.specialties.length > 0 ? (
                 spot.specialties.map((specialtie, index) => (
@@ -216,7 +217,7 @@ const TouristSpotDetail = () => {
       <div className="container py-4">
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-            <h4 className="fw-semibold fs-2">Dịch vụ</h4>
+            <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>Dịch vụ</h4>
             <div className="row g-4">
               {spot.services.length > 0 ? (
                 spot.services.map((service, index) => (
@@ -245,7 +246,7 @@ const TouristSpotDetail = () => {
       <div className="container py-4">
         <div className="border-0 card listing-form mb-4 p-4 rounded-4 shadow-sm">
           <div className="align-items-sm-center bg-light mb-4 p-4 rounded-3">
-            <h4 className="fw-semibold fs-2">Quà lưu niệm</h4>
+            <h4 className="fw-semibold fs-2"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)'}}>Quà lưu niệm</h4>
             <div className="row g-4">
               {spot.souvenirs.length > 0 ? (
                 spot.souvenirs.map((souvenir, index) => (

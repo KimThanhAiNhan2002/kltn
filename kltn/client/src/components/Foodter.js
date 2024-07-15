@@ -18,7 +18,7 @@ const Footer = () => {
                 <div className="align-items-center g-3 py-4 row">
                     <div className="col-lg-auto">
                         {/* start footer nav */}
-                        <ul className="list-unstyled list-separator mb-2 footer-nav d-flex">
+                        {/* <ul className="list-unstyled list-separator mb-2 footer-nav d-flex">
                             <li className="list-inline-item">
                                 <a href="/privacy" style={linkStyle}>Chính Sách Bảo Mật</a>
                             </li>
@@ -28,7 +28,7 @@ const Footer = () => {
                             <li className="list-inline-item">
                                 <a href="/cookies" style={linkStyle}>Chính Sách Cookie</a>
                             </li>
-                        </ul>
+                        </ul> */}
                         {/* end /. footer nav */}
                     </div>
                     <div className="col-lg order-md-first">
@@ -39,7 +39,7 @@ const Footer = () => {
                             </a>
                             {/* end /. footer logo */}
                             {/* start text */}
-                            <div className="col-sm-auto copy"> Du Lịch Tây Nam Bộ</div>
+                            <div className="col-sm-auto copy"> Du Lịch Tây Nam Bộ - Khám Phá Miền Sông Nước</div>
                             {/* end /. text */}
                         </div>
                     </div>

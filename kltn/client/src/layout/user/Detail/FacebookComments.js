@@ -8,7 +8,7 @@ const FacebookComments = () => {
   }, []);
 
   return (
-    <div className="fb-comments" data-href="http://103.179.188.20:3000" data-width="" data-numposts="5"></div>
+    <div className="fb-comments" data-href="http://localhost:3000" data-width="" data-numposts="5"></div>
   );
 };
 

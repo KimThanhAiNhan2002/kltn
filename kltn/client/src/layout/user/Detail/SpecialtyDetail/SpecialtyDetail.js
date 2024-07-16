@@ -9,7 +9,7 @@ const SpecialtyDetail = () => {
   useEffect(() => {
     const fetchSpecialty = async () => {
       try {
-        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/${id}`);
+        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/${id}`);
         const data = await response.json();
         setSpecialty(data.specialties[index]);
       } catch (error) {

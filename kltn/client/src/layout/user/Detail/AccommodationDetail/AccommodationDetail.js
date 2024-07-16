@@ -9,7 +9,7 @@ const AccommodationDetail = () => {
   useEffect(() => {
     const fetchAccommodation = async () => {
       try {
-        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/${id}`);
+        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/${id}`);
         const data = await response.json();
         setAccommodation(data.accommodations[index]);
       } catch (error) {

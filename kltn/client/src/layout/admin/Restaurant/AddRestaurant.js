@@ -87,7 +87,7 @@ const AddRestaurant = ({ setCurrentView, touristSpotId }) => {
             const formData = new FormData();
             formData.append('image', file);
 
-            fetch('http://103.179.188.20:5000/api/image/upload', { // Đường dẫn đến API upload
+            fetch('http://localhost:5000/api/image/upload', { // Đường dẫn đến API upload
               method: 'POST',
               body: formData
             })
@@ -163,7 +163,7 @@ const AddRestaurant = ({ setCurrentView, touristSpotId }) => {
                       config={{
                         extraPlugins: [MyCustomUploadAdapterPlugin],
                         simpleUpload: {
-                          uploadUrl: 'http://103.179.188.20:5000/api/image/upload',
+                          uploadUrl: 'http://localhost:5000/api/image/upload',
                           headers: { }
                         }
                       }}

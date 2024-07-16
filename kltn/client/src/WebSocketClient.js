@@ -1,5 +1,5 @@
 const WebSocketClient = () => {
-    const socket = new WebSocket('ws://localhost:3000/ws');
+    const socket = new WebSocket('ws://103.179.188.20:3000/ws');
   
     socket.onopen = () => {
       console.log('WebSocket connection opened');

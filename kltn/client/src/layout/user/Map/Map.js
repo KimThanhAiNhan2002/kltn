@@ -41,7 +41,7 @@ const Map = () => {
 
     const fetchTouristSpots = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/touristSpots/tourist-spots'); // API endpoint to fetch tourist spots
+        const response = await axios.get('http://103.179.188.20:5000/api/touristSpots/tourist-spots'); // API endpoint to fetch tourist spots
         setSpots(response.data);
         console.log(response.data); // Log the data to check the response
       } catch (error) {
@@ -180,10 +180,10 @@ const Map = () => {
     try {
       let data = [];
       if (searchBy === 'name') {
-        const response = await axios.get(`http://localhost:5000/api/touristSpots/search?query=${searchTerm}`);
+        const response = await axios.get(`http://103.179.188.20:5000/api/touristSpots/search?query=${searchTerm}`);
         data = response.data;
       } else if (searchBy === 'address') {
-        const response = await axios.get(`http://localhost:5000/api/touristSpots/searchByAddress?query=${searchTerm}`);
+        const response = await axios.get(`http://103.179.188.20:5000/api/touristSpots/searchByAddress?query=${searchTerm}`);
         data = response.data;
       }
 

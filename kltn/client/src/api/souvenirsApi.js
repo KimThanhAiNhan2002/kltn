@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://103.179.188.20:5000/api/touristSpots';
+const API_URL = 'http://localhost:5000/api/touristSpots';
 
 export const getSouvenirs = async (touristSpotId) => {
   try {

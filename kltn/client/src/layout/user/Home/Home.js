@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchAllSpots = async () => {
       try {
-        const response = await fetch('http://103.179.188.20:5000/api/touristSpots/tourist-spots');
+        const response = await fetch('http://localhost:5000/api/touristSpots/tourist-spots');
         const data = await response.json();
         setAllSpots(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const Home = () => {
     const fetchSpotsByCategory = async () => {
       if (category) {
         try {
-          const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/category/${category}`);
+          const response = await fetch(`http://localhost:5000/api/touristSpots/category/${category}`);
           const data = await response.json();
           setSearchResults(data);
         } catch (error) {
@@ -102,7 +102,7 @@ const Home = () => {
     setMessage('');
     try {
       const endpoint = searchBy === 'name' ? 'search' : 'searchByAddress';
-      const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/${endpoint}?query=${searchTerm}`);
+      const response = await fetch(`http://localhost:5000/api/touristSpots/${endpoint}?query=${searchTerm}`);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');

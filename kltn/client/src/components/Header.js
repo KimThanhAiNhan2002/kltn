@@ -7,7 +7,7 @@ const Header = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://103.179.188.20:5000/api/touristSpots/categories');
+        const response = await fetch('http://localhost:5000/api/touristSpots/categories');
         const data = await response.json();
         setCategories(data);
       } catch (error) {

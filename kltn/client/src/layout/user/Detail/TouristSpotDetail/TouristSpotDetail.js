@@ -14,7 +14,7 @@ const TouristSpotDetail = () => {
   useEffect(() => {
     const fetchSpot = async () => {
       try {
-        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/${id}`);
+        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/${id}`);
         const data = await response.json();
         setSpot(data);
       } catch (error) {
@@ -55,13 +55,13 @@ const TouristSpotDetail = () => {
               <div className="mb-5">
                 <div className="border-bottom border-top py-3 fs-15">
                   <div className="align-items-center d-flex justify-content-between">
-                    <span style={{ width: '30%' }} className="text-muted">Địa chỉ:</span>
+                    <span style={{ width: '30%',fontWeight: 'bold' }} className="text-muted">Địa chỉ:</span>
                     <span style={{ width: '67%' }} className="fw-semibold">{spot.address}</span>
                   </div>
                 </div>
                 <div className="border-bottom py-3 fs-15">
                   <div className="align-items-center d-flex justify-content-between mb-2">
-                    <span style={{ width: '30%' }} className="text-muted">Loại hình: </span>
+                    <span style={{ width: '30%',fontWeight: 'bold' }} className="text-muted">Loại hình: </span>
                     <span style={{ width: '67%' }} className="fw-semibold">{spot.category}</span>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const TouristSpotDetail = () => {
               <div className="align-items-sm-center rounded-3">
                 <div style={{ maxWidth: '688px' }} dangerouslySetInnerHTML={{ __html: spot.description }} className="News__Detail__Content"></div>
               </div>
-              <DisqusComments url={`http://103.179.188.20:3000/touristSpots/${spot._id}`} identifier={spot._id} />
+              <DisqusComments url={`http://localhost:3000/touristSpots/${spot._id}`} identifier={spot._id} />
             </div>
           </div>
         </div>

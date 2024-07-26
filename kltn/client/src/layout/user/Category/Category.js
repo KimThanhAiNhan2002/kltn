@@ -10,7 +10,7 @@ const Category = () => {
   useEffect(() => {
     const fetchSpots = async () => {
       try {
-        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/category/${category}`);
+        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/category/${category}`);
         const data = await response.json();
         setSpots(data);
       } catch (error) {

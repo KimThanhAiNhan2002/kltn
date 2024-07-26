@@ -9,7 +9,7 @@ const SpecialtyDetail = () => {
   useEffect(() => {
     const fetchSpecialty = async () => {
       try {
-        const response = await fetch(`http://103.179.188.20:5000/api/touristSpots/tourist-spots/${id}`);
+        const response = await fetch(`http://localhost:5000/api/touristSpots/tourist-spots/${id}`);
         const data = await response.json();
         setSpecialty(data.specialties[index]);
       } catch (error) {
@@ -32,15 +32,21 @@ const SpecialtyDetail = () => {
           <div style={{ borderBottomRightRadius: '1em', borderBottomLeftRadius: '1em' }} className="border-0 p-4 position-relative profile-card shadow-sm text-center">
             <h3 className="profile-card__name"style={{ fontWeight: 'bold', color: 'rgb(248 69 37)' }}>{specialty.name}</h3>
             <div className="mb-5">
+            <div className="border-bottom border-top py-3 fs-15">
+                <div className="align-items-center d-flex justify-content-between">
+                  <span style={{ width: '30%',fontWeight: 'bold'}} className="text-muted">Giá:</span>
+                  <span style={{ width: '67%' }} className="fw-semibold">{specialty.price}</span>
+                </div>
+              </div>
               <div className="border-bottom border-top py-3 fs-15">
                 <div className="align-items-center d-flex justify-content-between">
-                  <span style={{ width: '30%' }} className="text-muted">Nguồn gốc:</span>
+                  <span style={{ width: '30%',fontWeight: 'bold'}} className="text-muted">Nguồn gốc:</span>
                   <span style={{ width: '67%' }} className="fw-semibold">{specialty.origin}</span>
                 </div>
               </div>
               <div className="border-bottom py-3 fs-15">
                 <div className="align-items-center d-flex justify-content-between mb-2">
-                  <span style={{ width: '30%' }} className="text-muted">Hạn sử dụng: </span>
+                  <span style={{ width: '30%',fontWeight: 'bold' }} className="text-muted">Hạn sử dụng: </span>
                   <span style={{ width: '67%' }} className="fw-semibold">{specialty.expired}</span>
                 </div>
               </div>
